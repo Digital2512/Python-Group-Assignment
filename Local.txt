@@ -1,0 +1,7 @@
+L001;Nasi Lemak;12.50
+L002;Roti Canai;5.50
+L003;Nasi Goreng Kampung;14.99
+L004;Nasi Ayam Spiderman;17.99
+L005;Fried Bee Hoon;14.99
+L006;Char Kuey Teow;14.25
+L007;Tosai;5.00
