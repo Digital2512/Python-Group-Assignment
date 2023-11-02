@@ -1,7 +1,6 @@
 import os
 import sys 
 import time
-import trial #located in trial.py
 
 def listToString(list):
     string = ''
