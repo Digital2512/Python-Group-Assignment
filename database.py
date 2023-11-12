@@ -15,7 +15,7 @@ def overwriteFile(fileName, stringVariable):
     #Function to overwrite the file with the string variable
     with open(fileName, "+w") as file:
         file.write(stringVariable)
-
+        
 def readFile(fileName):
     list=[]
     with open(fileName, "+r") as file:
@@ -40,3 +40,16 @@ def readListValue(valueInput, indexToCheck, indexToRead, listToCheck):
                     return values[indexToRead]
             else: 
                 return "Index Out Of Bound"
+
+def checkForDuplicates(filename, stringToCheck,indexToCheck):
+    duplicateFound = 0
+    with open(filename, "+r") as file:
+        for line in file:
+            values = line.strip().split(";")
+            if values[indexToCheck] == stringToCheck:
+                duplicateFound += 1
+                if duplicateFound >= 2:
+                    return True
+            else: 
+                continue
+    return False
