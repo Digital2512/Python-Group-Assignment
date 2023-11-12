@@ -3,6 +3,7 @@ import sys
 import time
 import database
 import generalUtils
+import receptionist
 
 def pgMain():
     while True: 
@@ -22,7 +23,7 @@ def pgMain():
             #Give 3 tries for username and also password respectively
             for i in range(0 , 3, 1):
                 inputUsername = input("Username: ")
-                isUsernameFound = database.searchListValue(inputUsername, 1, list)
+                isUsernameFound = database.searchListValue(inputUsername, 1, "UserDetails.txt")
                 if isUsernameFound:
                     break
 
@@ -31,7 +32,7 @@ def pgMain():
             
             for i in range(0,3,1):
                 inputPassword = input("\nPassword: ")
-                isPasswordFound = database.searchListValue(inputPassword, 2, list)
+                isPasswordFound = database.searchListValueBasedOnValue(inputUsername, 1, 2, inputPassword, "UserDetails.txt")
                 if isPasswordFound:
                     break
             
@@ -56,7 +57,9 @@ def pgMain():
                     # Add code to navigate to the student's page here
                 elif capitalizedRole == "RECEPTIONIST":
                     print("Receptionist")
-                    break
+                    result = receptionist.pgReceptionist(inputUsername)
+                    if result == "LOGOUT":
+                        continue
                 else: 
                     print("Role Not Found")
                     break
