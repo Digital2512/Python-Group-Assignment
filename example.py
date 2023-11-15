@@ -18,8 +18,7 @@ def updateProfile(fileToCheck, IDNumber, role, password, ICNumber, fullName, ema
 
     # Add the updated line at the end
     if updatedProfile == True:
-        updated_data.append(
-            f"{capitalizedRole};{IDNumber};{password};{ICNumber};{fullName};{email};{phoneNumber};{gender};{birthday}\n")
+        updated_data.append(f"{capitalizedRole};{IDNumber};{password};{ICNumber};{fullName};{email};{phoneNumber};{gender};{birthday}\n")
 
         # Write the updated data back to the file
         with open(fileToCheck, "+w") as file:
@@ -76,8 +75,7 @@ def pgAdmin(userID):
                     phoneNumber = database.readListValue(userID, 1, 6, "UserDetails.txt")
                     gender = database.readListValue(userID, 1, 7, "UserDetails.txt")
                     birthday = database.readListValue(userID, 1, 8, "UserDetails.txt")
-                    print(
-                        f"User ID: {userID}\nIC Number: {ICNumber}\nFull Name: {fullName}\nEmail: {email}\nPhone Number: {phoneNumber}\nGender: {gender}\nBirthday: {birthday}")
+                    print(f"User ID: {userID}\nIC Number: {ICNumber}\nFull Name: {fullName}\nEmail: {email}\nPhone Number: {phoneNumber}\nGender: {gender}\nBirthday: {birthday}")
                     generalUtils.createNewLine()
                     while True:
                         print("Done Viewing(Enter Y when you are done)? ")
@@ -115,7 +113,7 @@ def pgAdmin(userID):
                         print("Is this correct? Y/N ")
                         confirmationChoice = input("Choice: ").upper()
                         if confirmationChoice == "Y":
-                            if updateProfile("UserDetails.txt", userID, "RECEPTIONIST", password, ICNumber, formattedFullName, email,phoneNumber, birthday, gender) == True:
+                            updateProfile("UserDetails.txt", userID, "ADMIN", password, ICNumber, formattedFullName, email,phoneNumber, birthday, gender)
                                 print("Profile Updated")
                                 break
                         elif confirmationChoice == "N":
