@@ -227,14 +227,14 @@ def pgReceptionist(userID):
             email = input("\nEmail: ")
             phoneNumber = int(input("\nPhone Number: "))
             generalUtils.createNewLine()
-            while True: 
+            while True:
                 gender = input("Gender: \n1. Male\n2. Female\n3. N/A\nChoice: ").upper()
                 generalUtils.createNewLine()
                 if gender == "MALE" or gender == "FEMALE" or gender == "N/A":
                     break
-                else: 
+                else:
                     continue
-            while True: 
+            while True:
                 birthday = input("Birthday(DD/MM/YYYY): ").replace("/","-")
                 generalUtils.createNewLine()
                 if len(str(birthday)) == 10:
@@ -364,7 +364,7 @@ def pgReceptionist(userID):
             gender = database.readListValue(userID, 1, 7, "UserDetails.txt")
             birthday = database.readListValue(userID, 1, 8, "UserDetails.txt")
 
-            print(f"User ID: {userID}\nIC Number: {fullName}\nEmail: {email}\nPhone Number: {phoneNumber}\nGender: {gender}\nBirthday: {birthday}")
+            print(f"User ID: {userID}\nIC Number: {ICNumber}\nFull Name: {fullName}\nEmail: {email}\nPhone Number: {phoneNumber}\nGender: {gender}\nBirthday: {birthday}")
             generalUtils.createNewLine()
             while True:
                 print("Done Viewing(Enter Y when you are done)? ")
