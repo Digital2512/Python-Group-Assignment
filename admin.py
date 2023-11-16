@@ -44,16 +44,25 @@ def pgAdmin(userID):
                     print(f"Welcome, {splittedName} ({values[0]})")
             generalUtils.createNewLine()
             while True:
-                print("Menu:\n1.Register\n2.Fill Income\n3.Admin Profile")
-                choice = int(input("1.Register\n2.Fill Income\n3.View Admin Profile\n4.Update Admin Profile\n5.Log Out\nChoice:"))
+                generalUtils.clearConsole()
+                generalUtils.createNewLine()
+                print("1.Register\n2.View Income\n3.View Admin Profile\n4.Update Admin Profile\n5.Log Out")
+                generalUtils.createNewLine()
+                choice = int(input("Choice:"))
                 if choice == 1:
+                    generalUtils.clearConsole()
                     print("Register:\n1.Receptionist\n2.Tutor")
-                    choiceRegister = int(input("1.Receptionist\n2.Tutor\nChoice:"))
+                    generalUtils.createNewLine()
+                    choiceRegister = int(input("Choice:"))
                     if choiceRegister == 1:
+                        print("Register Receptonist")
+                        generalUtils.createNewLine()
                         userID = UniqueIDCreation.generateReceptionistID()
                         password = input("Password:")
                         registerReceptionist(userID,password)
                     elif choiceRegister == 2:
+                        print("Register Tutor")
+                        generalUtils.createNewLine()
                         userID = UniqueIDCreation.generateTutorID()
                         password = input("Password:")
                         subject = input("Subject:")
@@ -61,9 +70,11 @@ def pgAdmin(userID):
                     else:
                         continue
                 elif choice == 2:
-                    print("Income:")
+                    print("View Monthly Income")
                 elif choice == 3:
-                    print("Viewing Admin Profile.")
+                    generalUtils.clearConsole()
+                    print("Viewing Admin Profile")
+                    generalUtils.createNewLine()
                     ICNumber = database.readListValue(userID,1,3,"UserDetails.txt")
                     fullName = database.readListValue(userID,1,4,"UserDetails.txt")
                     email = database.readListValue(userID,1,5,"UserDetails.txt")
@@ -81,7 +92,10 @@ def pgAdmin(userID):
                         else:
                             continue
                 elif choice == 4:
-                    print("Update Admin Profile.")
+                    generalUtils.clearConsole()
+                
+                    print("Update Admin Profile")
+                    generalUtils.createNewLine()
                     password = input("Password:")
                     email = input("Email:")
                     fullName = input("Full Name:")
