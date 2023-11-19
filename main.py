@@ -4,6 +4,7 @@ import time
 import database
 import generalUtils
 import receptionist
+import tutor
 
 def pgMain():
     while True: 
@@ -49,7 +50,9 @@ def pgMain():
                     # Add code to navigate to the admin's page here
                 elif capitalizedRole == "TUTOR":
                     print("Tutor")
-                    break
+                    result = tutor.pgTutor(inputUsername)
+                    if result == "LOGOUT":
+                        continue
                     # Add code to navigate to the tutor's page here
                 elif capitalizedRole == "STUDENT":
                     print("Student")
