@@ -28,15 +28,23 @@ def updateProfile(fileToCheck, IDNumber, role, password, ICNumber, fullName, ema
 
 
 def registerReceptionist(userID, password):
-    userProfile = f"RECEPTIONIST;{userID};{password}"
+    userProfile = f"RECEPTIONIST;{userID};{password}\n"
     return database.writeToFile("UserDetails.txt", userProfile)
 
 def registerTutor(userID, password, subject):
-    userProfile = f"TUTOR;{userID};{password};{subject}"
+    userProfile = f"TUTOR;{userID};{password};{subject}\n"
     return database.writeToFile("UserDetails.txt", userProfile)
 
 
+def readSubjectCode(fileName, indexOfSubjectCode):
+    subjectCode = []
+    with open(fileName, "r") as file:
+        for line in file:
+            values = line.strip().split(";")
+            subjectCode.append(values[indexOfSubjectCode])
+    return subjectCode
 def pgAdmin(userID):
+    subjectCode = readSubjectCode("SubjectInfo.txt", 1)
     while True:
         generalUtils.clearConsole()
         generalUtils.createNewLine()
@@ -54,23 +62,36 @@ def pgAdmin(userID):
                 generalUtils.createNewLine()
                 choice = int(input("Choice:"))
                 if choice == 1:
+                    existingIDs = UniqueIDCreation.readIDFromExistingFile("UserDetails.txt",0)
                     generalUtils.clearConsole()
                     print("Register:\n1.Receptionist\n2.Tutor")
                     generalUtils.createNewLine()
                     choiceRegister = int(input("Choice:"))
                     if choiceRegister == 1:
+                        generalUtils.createNewLine()
                         print("Register Receptonist")
                         generalUtils.createNewLine()
-                        userID = UniqueIDCreation.generateReceptionistID()
+                        userID = UniqueIDCreation.generateReceptionistID(existingIDs)
                         password = input("Password:")
                         registerReceptionist(userID,password)
                     elif choiceRegister == 2:
+                        listOfSubject = []
+                        generalUtils.clearConsole()
+                        generalUtils.createNewLine()
                         print("Register Tutor")
                         generalUtils.createNewLine()
-                        userID = UniqueIDCreation.generateTutorID()
+                        userID = UniqueIDCreation.generateTutorID(existingIDs)
                         password = input("Password:")
-                        subject = input("Subject:")
-                        registerTutor(userID,password,subject)
+                        numberOfSubjects = int(input("Number of Subjects: "))
+                        while len(listOfSubject) != numberOfSubjects: 
+                            while True:
+                                subject = input("Subject Code:").upper()
+                                if subject in subjectCode:
+                                    listOfSubject.append(subject)
+                                else:
+                                    print("Subject code not found")
+                                    continue
+                        registerTutor(userID,password,listOfSubject)
                     else:
                         continue
                 elif choice == 2:
