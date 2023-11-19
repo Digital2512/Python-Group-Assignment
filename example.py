@@ -182,7 +182,7 @@ def pgAdmin(userID):
                             continue
                 elif choice == 4:
                     generalUtils.clearConsole()
-                
+                    generalUtils.createNewLine()
                     print("Update Admin Profile")
                     generalUtils.createNewLine()
                     password = input("Password:")
