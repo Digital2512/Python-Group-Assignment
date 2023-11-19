@@ -47,13 +47,14 @@ def updateClassInfo(fileToCheck, classCode, time, location, date, className, cla
             file.writelines(updated_data)
     return updatedClass
 
-def readExistingClassCode(fileName, indexOfClassCode):
-    existingClassCode = []
-    with open(fileName, "r") as file:
-        for line in file:
-            values = line.strip().split(";")
-            existingClassCode.append(values[indexOfClassCode])
-    return existingClassCode
+def readClassAssigned(fileName, indexOfClassCode, numberOfSubjects):
+    classCodeAssigned = []
+    for i in range(indexOfClassCode, numberOfSubjects, 1):
+        with open(fileName, "r") as file:
+            for line in file:
+                values = line.strip().split(";")
+                classCodeAssigned.append(values[indexOfClassCode])
+    return classCodeAssigned
 
 def addClass(scheduleFileName, classFileName, classCode, className, classForm, classTime, classLocation, classDay):
     with open(classFileName, "a") as classFile:
@@ -79,7 +80,7 @@ def deleteClass(scheduleFileName, classFileName, classCode, className, classForm
     deletedSchedule = False
     classString = f"{classCode};{className};{classForm};{classDay};{classTime};{classLocation}"
     updatedClass = []
-    updatedSchedule = []
+    updatedScedule = []
     with open(classFileName, "r") as classFile:
         lines = classFile.readlines()
     for line in lines:
@@ -133,14 +134,14 @@ def pgTutor(userID):
             print("1. Add classes \n2. Delete Classes")
             choiceClass = input("Choice: ")
             if choiceClass == "1":
-                existingClassCode = readExistingClassCode("SubjectInfo.txt", 0)
+                classAssigned = readClassAssigned("UserDetails.txt",0)
                 while True:
                     generalUtils.clearConsole()
                     generalUtils.createNewLine()
                     print("Add classes")
                     while True: 
                         classCode = input("Class Code: ")
-                        if classCode in existingClassCode:
+                        if classCode in classAssigned:
                             break
                         else:
                             continue
@@ -194,7 +195,7 @@ def pgTutor(userID):
                     else:
                         print("Class added")
             elif choiceClass == "2":
-                existingClassCode = readExistingClassCode("SubjectInfo.txt", 0)
+                classAssigned = readAssignedClass("SubjectInfo.txt",0)
                 while True:
                     generalUtils.clearConsole()
                     generalUtils.createNewLine()
@@ -203,7 +204,7 @@ def pgTutor(userID):
                     while True: 
                         classCode = input("Class Code: ")
                         if classCode in existingClassCode:
-                            break
+                            classAssigned
                         else:
                             continue
                     className = input("Class Name: ").replace(" ","_")
@@ -257,34 +258,43 @@ def pgTutor(userID):
                         print("Class deleted")
                         time.sleep(3)
         elif choice == "2":
-            print("Update class info")
-            classCode = input("Class code: ")
-            className = input("Class name: ")
+            classAssigned = readAssignedClass("SubjectInfo.txt",0)
             while True:
-                classForm = input("Form: ").upper()
-                if classForm in forms:
-                    break
-                else:
-                    continue
-            while True: 
-                classDate = input("Date(XX-XX-XXXX): ")
-                if len(classDate) == 10:
-                    break
-                else: 
-                    continue
-            while True:
-                classTime = input("Date(XX:XX): ")
-                if len(classTime) == 5:
-                    break
-                else: 
-                    continue
-            while True: 
-                classLocation = input("Location: ")
-                if classLocation in classrooms:
-                    break
-                else:
-                    continue
-            updateClassInfo("ClassScehdule.txt", classCode, classTime, classLocation, classDate, className, classForm)
+                generalUtils.clearConsole()
+                generalUtils.createNewLine()
+                print("Update class info")
+                while True:
+                    classCode = input("Class code: ")
+                    if classCode in classAssigned:
+                        break
+                    else:
+                        continue
+                className = input("Class name: ")
+                while True:
+                    classForm = input("Form: ").upper()
+                    if classForm in forms:
+                        break
+                    else:
+                        continue
+                while True: 
+                    classDate = input("Date(XX-XX-XXXX): ")
+                    if len(classDate) == 10:
+                        break
+                    else: 
+                        continue
+                while True:
+                    classTime = input("Date(XX:XX): ")
+                    if len(classTime) == 5:
+                        break
+                    else: 
+                        continue
+                while True: 
+                    classLocation = input("Location: ")
+                    if classLocation in classrooms:
+                        break
+                    else:
+                        continue
+                updateClassInfo("ClassScehdule.txt", classCode, classTime, classLocation, classDate, className, classForm)
         elif choice == "3":
             print("View class info")
             existingClassCode = readExistingClassCode("SubjectInfo.txt", 0)
