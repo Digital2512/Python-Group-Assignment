@@ -43,8 +43,9 @@ def readSubjectCode(fileName, indexOfSubjectCode):
             values = line.strip().split(";")
             subjectCode.append(values[indexOfSubjectCode])
     return subjectCode
+
 def pgAdmin(userID):
-    subjectCode = readSubjectCode("SubjectInfo.txt", 1)
+    subjectCode = readSubjectCode("SubjectInfo.txt", 0)
     while True:
         generalUtils.clearConsole()
         generalUtils.createNewLine()
@@ -64,6 +65,7 @@ def pgAdmin(userID):
                 if choice == 1:
                     existingIDs = UniqueIDCreation.readIDFromExistingFile("UserDetails.txt",0)
                     generalUtils.clearConsole()
+                    generalUtils.createNewLine()
                     print("Register:\n1.Receptionist\n2.Tutor")
                     generalUtils.createNewLine()
                     choiceRegister = int(input("Choice:"))
@@ -88,6 +90,7 @@ def pgAdmin(userID):
                                 subject = input("Subject Code:").upper()
                                 if subject in subjectCode:
                                     listOfSubject.append(subject)
+                                    break
                                 else:
                                     print("Subject code not found")
                                     continue
