@@ -4,6 +4,29 @@ import time
 import random
 import UniqueIDCreation
 
+def changeSubjectIncome(subjectCode, indexToCheck, indexToChange, changedAmount, fileToCheck):
+
+    # Read the content of the file
+    with open(fileToCheck, 'r') as file:
+        lines = file.readlines()
+
+    # Find the line with the specified subject code and update the value
+    for i, line in enumerate(lines):
+        if line.startswith(subjectCode):
+            parts = line.split(';')
+            # Check if the value is not None before converting to int
+            if parts[2] is not None:
+                parts[2] = str(changedAmount)
+            else:
+                # Handle the case where the value is None, for example, set it to 0
+                parts[2] = '0'
+            lines[i] = ';'.join(parts)
+            break
+
+    # Write the modified content back to the file
+    with open(fileToCheck, 'w') as file:
+        file.writelines(lines)
+
 def updateProfile(fileToCheck, IDNumber, role, password, ICNumber, fullName, email, phoneNumber, birthday, gender):
     updatedProfile = False
     capitalizedRole = role.upper()
@@ -313,9 +336,10 @@ def pgReceptionist(userID):
                 userID = database.readListValue(paymentID, 0, 1, "PaymentRequest.txt")
                 fullName = database.readListValue(paymentID, 0, 2, "PaymentRequest.txt")
                 amount = database.readListValue(paymentID, 0, 3, "PaymentRequest.txt")
-                subject = database.readListValue(paymentID, 0, 4, "PaymentRequest.txt")
-                generalUtils.createNewLine()
-                print(f"User ID: {userID}\nFull name: {fullName}\nAmount: {amount}\nSubject: {subject}")
+                subjectCode = database.readListValue(paymentID, 0, 4, "PaymentRequest.txt")
+                subject = database.readListValue(paymentID, 0, 5, "PaymentRequest.txt")
+                form = database.readListValue(paymentID, 0, 6, "PaymentRequest.txt")
+                print(f"User ID: {userID}\nFull name: {fullName}\nAmount: {amount}\nSubject Code: {subjectCode}\nSubject: {subject}\nForm: {form}")
                 generalUtils.createNewLine()
                 print("Print Receipt? Y/N")
                 receiptConfimation = input("Choice: ").upper()
@@ -327,11 +351,20 @@ def pgReceptionist(userID):
                             receiptID = random.randint(1,1000000000)
                         generalUtils.clearConsole()
                         formatedID = f"{receiptID:09d}"
-                        status = "ACCEPTED"
+                        status = "APPROVED"
                         generalUtils.createNewLine()
                         receiptString = f"Receipt ID: {formatedID}\nUser ID: {userID}\nFull name: {fullName}\nAmount: {amount}\nSubject: {subject}\nStatus: {status}"
                         print(receiptString)
                         generalUtils.createNewLine()
+                        beforeAmount = database.readListValue(subjectCode, 0, 2, "SubjectInfo.txt")
+                        if beforeAmount == None: 
+                            beforeAmount = 0
+                        addedAmount = database.readListValue(paymentID,0,3,"PaymentRequest.txt")
+                        afterAmount = int(beforeAmount) + int(addedAmount)
+                        print(subjectCode)
+            
+                        print(afterAmount)
+                        changeSubjectIncome(subjectCode,0,2,afterAmount,"SubjectInfo.txt")
                         fileReceiptString = f"{formatedID};{userID};{fullName};{amount};{subject};{status}\n"
                         database.writeToFile("ReceiptCollection.txt", fileReceiptString)
                         while True: 
@@ -347,6 +380,7 @@ def pgReceptionist(userID):
                         status = "REJECTED"
                         fileReceiptString = f"{formatedID};{userID};{fullName};{amount};{subject};{status}\n"
                         database.writeToFile("ReceiptCollection.txt", fileReceiptString)
+
                         deleteRequest("PaymentRequest.txt", paymentID)
                         time.sleep(3)
                         break

@@ -55,9 +55,6 @@ def generateStudentID(existingIDs):
     newTutorID = f"S{formattedNewNumber}"
     return newTutorID
 
-
-
-
 def generateTutorID(existingIDs):
     maxNumber = 0
     for ID in existingIDs:
@@ -72,3 +69,30 @@ def generateTutorID(existingIDs):
     newTutorID = f"T{formattedNewNumber}"
     return newTutorID
 
+def generateRequestID(existingIDs):
+    maxNumber = 0
+    for ID in existingIDs:
+        if ID.startswith("REQ"):
+            try:
+                number= int(ID[1:])
+                maxNumber = max(maxNumber,number)
+            except ValueError:
+                pass
+    newNumber = maxNumber + 1
+    formattedNewNumber = f"{newNumber:03d}"
+    newRequestID = f"REQ{formattedNewNumber}"
+    return newRequestID
+
+def generatePaymentID(existingIDs):
+    maxNumber = 0
+    for ID in existingIDs:
+        if ID.startswith("P"):
+            try:
+                number = int(ID[1:])
+                maxNumber = max(maxNumber, number)
+            except ValueError:
+                pass
+    newNumber = maxNumber + 1
+    formattedNewNumber = f"{newNumber:03d}"
+    newPaymentID = f"P{formattedNewNumber}"
+    return newPaymentID
