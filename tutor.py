@@ -70,9 +70,9 @@ def addClassSchedule(scheduleFileName,classCode,classTime, classLocation, classD
     with open(scheduleFileName, "r") as scheduleFile:
         lines = scheduleFile.readlines()
 
-    for i, line in enumerate(lines):
+    for line in lines:
         parts = line.strip().split(";")
-        if parts[0] == classLocation and parts[1] == classDay and parts[2] == classTime and parts[4] == "AVAIALBLE":
+        if parts[0] == classLocation and parts[1] == classDay and parts[2] == classTime and parts[4] == "AVAILABLE":
             classScheduleAdded = True
             changedLine = f"{classLocation};{classDay};{classTime};{classCode};UNAVAILABLE;\n"
             scheduleList.append(changedLine)
@@ -165,20 +165,15 @@ def pgTutor(userID):
                     generalUtils.createNewLine()
                     print("Add classes")
                     while True: 
-                        classCode = input("Class Code: ")
+                        classCode = input("Class Code: ").upper()
                         if classCode in subjectCodeList:
                             break
                         else:
                             continue
                     className = input("Class Name: ")
                     formattedClassName = className.replace(" ","_")
-                    while True:
-                        classForm = input("Form: ").upper().replace(" ","_")
-                        formattedClassForm = classForm.upper().replace()
-                        if classForm in forms:
-                            break
-                        else:
-                            continue
+                    classForm = f"Form {classCode[-1:]}"
+                    formattedClassForm = classForm.upper().replace(" ","_")
                     while True: 
                         classDay = input("Day: ").upper()
                         if classDay in days:
@@ -213,7 +208,9 @@ def pgTutor(userID):
                             break
                         else:
                             continue
-                    print(f"Class code: {classCode}\nClass name: {className}\nClass Form: {classForm}\nClass Day: {classDay}\nClass Time: {classTime}\nClass Location: {classLocation}")
+                    generalUtils.clearConsole()
+                    generalUtils.createNewLine()
+                    print(f"Class code: {classCode}\nClass name: {className}\nClass Form: {classForm}\nClass Day: {classDay.capitalize()}\nClass Time: {classTime}\nClass Location: {classLocation}")
                     while True:
                         doneView = input("Is this correct? (Press Y/N)?")
                         if doneView == "Y":
@@ -230,6 +227,7 @@ def pgTutor(userID):
                         else:
                             continue
                         break
+                    break
             elif choiceClass == "2":
                 while True:
                     generalUtils.clearConsole()
@@ -237,19 +235,16 @@ def pgTutor(userID):
                     print("Delete classes")
                     generalUtils.createNewLine()
                     while True: 
-                        classCode = input("Class Code: ")
+                        classCode = input("Class Code: ").upper()
                         if classCode in subjectCodeList:
                             break
                         else:
                             continue
                     className = input("Class Name: ")
                     formattedClassName = className.replace(" ","_")
-                    while True:
-                        classForm = input("Form: ").upper()
-                        if classForm in forms:
-                            break
-                        else:
-                            continue
+                    # classForm = input("Form: ").upper()
+                    classForm = f"Form {classCode[-1:]}"
+                    formattedClassForm = classForm.upper().replace(" ","_")
                     while True: 
                         classDay = input("Day: ").upper()
                         if classDay in days:
@@ -284,6 +279,8 @@ def pgTutor(userID):
                             break
                         else:
                             continue
+                    generalUtils.clearConsole()
+                    generalUtils.createNewLine()
                     print(f"Class code: {classCode}\nClass name: {className}\nClass Form: {classForm}\nClass Day: {classDay}\nClass Time: {classTime}\nClass Location: {classLocation}")
                     while True:
                         doneView = input("Confirm (Press Y/N)?")
@@ -302,13 +299,14 @@ def pgTutor(userID):
                         else:
                             continue
                     break
+                break
         elif choice == "2":
             while True:
                 generalUtils.clearConsole()
                 generalUtils.createNewLine()
                 print("Update class info")
                 while True:
-                    classCode = input("Class code: ")
+                    classCode = input("Class code: ").upper()
                     if classCode in subjectCodeList:
                         break
                     else:
@@ -343,7 +341,7 @@ def pgTutor(userID):
             print("View class info")
             existingClassCode = readClassAssigned("SubjectInfo.txt", 0)
             while True:
-                classCode = input("Class Code: ")
+                classCode = input("Class Code: ").upper()
                 if classCode in existingClassCode:
                     break
                 else:
