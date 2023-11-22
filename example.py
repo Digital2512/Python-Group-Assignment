@@ -7,7 +7,7 @@ import time
 def updateProfile(fileToCheck, IDNumber, role, password, ICNumber, fullName, email, phoneNumber, birthday, gender):
     updatedProfile = False
     capitalizedRole = role.upper()
-    updated_data = []  # To store updated data
+    updated_data = gi[]  # To store updated data
     with open(fileToCheck, "+r") as file:
         for line in file:
             values = line.strip().split(";")
@@ -220,11 +220,11 @@ def pgAdmin(userID):
                         else:
                             print("Invalid Input.Please try again.\n")
                         time.sleep(5)
-            elif choice == 5:
-                print("Log Out")
-                return "LOGOUT"
-            else:
-                continue
+                elif choice == 5:
+                    print("Log Out")
+                    return "LOGOUT"
+                else:
+                    continue
 
 
 
