@@ -122,11 +122,11 @@ def pgAdmin(userID):
                         else:
                             print("Invalid Input!\n")
                         time.sleep(5)
-                elif choice == 5:
-                    print("Log Out")
-                    return "LOGOUT"
-                else:
-                    continue
+            elif choice == 5:
+                print("Log Out")
+                return "LOGOUT"
+            else:
+                continue
 
 
 
