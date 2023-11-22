@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="922b39b3-aeed-4b5c-83ce-64d07ce7a244" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/testing.py" beforeDir="false" afterPath="$PROJECT_DIR$/testing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClassInfo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ClassInfo.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ClassSchedule.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ClassSchedule.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserDetails.txt" beforeDir="false" afterPath="$PROJECT_DIR$/UserDetails.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutor.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutor.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,22 +22,22 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 6
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
   <component name="ProjectId" id="2Xr285GRbtbLdIpbYwfMD7HX39u" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "hs",
-    "last_opened_file_path": "C:/Users/Valerie Annabella/OneDrive/Documents/GitHub/Python-Group-Assignment"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;QQ&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Valerie Annabella/OneDrive/Documents/GitHub/Python-Group-Assignment&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
