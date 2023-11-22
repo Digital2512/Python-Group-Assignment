@@ -5,7 +5,6 @@ import database
 import generalUtils
 import receptionist
 import admin
-import example
 
 def pgMain():
     while True: 
@@ -47,7 +46,7 @@ def pgMain():
                 capitalizedRole = roleFound.upper()
                 if capitalizedRole == "ADMIN":
                     print("Admin")
-                    result = example.pgAdmin(inputUsername)
+                    result = admin.pgAdmin(inputUsername)
                     if result == "LOGOUT":
                         continue
                     # Add code to navigate to the admin's page here
