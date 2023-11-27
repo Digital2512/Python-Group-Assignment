@@ -7,7 +7,7 @@ import time
 def updateProfile(fileToCheck, IDNumber, role, password, ICNumber, fullName, email, phoneNumber, birthday, gender):
     updatedProfile = False
     capitalizedRole = role.upper()
-    updated_data = gi[]  # To store updated data
+    updated_data = []  # To store updated data
     with open(fileToCheck, "+r") as file:
         for line in file:
             values = line.strip().split(";")
@@ -28,11 +28,11 @@ def updateProfile(fileToCheck, IDNumber, role, password, ICNumber, fullName, ema
 
 
 def registerReceptionist(userID, password):
-    userProfile = f"RECEPTIONIST;{userID};{password}\n"
+    userProfile = f"\nRECEPTIONIST;{userID};{password}"
     return database.writeToFile("UserDetails.txt", userProfile)
 
-def registerTutor(userID, password, subject):
-    userProfile = f"TUTOR;{userID};{password};{subject}\n"
+def registerTutor(userID, password, subject, numberOfSubjects):
+    userProfile = f"\nTUTOR;{userID};{password};{numberOfSubjects};{subject}"
     return database.writeToFile("UserDetails.txt", userProfile)
 
 
@@ -94,7 +94,7 @@ def pgAdmin(userID):
                                 else:
                                     print("Subject code not found")
                                     continue
-                        registerTutor(userID,password,listOfSubject)
+                        registerTutor(userID,password,listOfSubject, numberOfSubjects)
                     else:
                         continue
                 elif choice == 2:
