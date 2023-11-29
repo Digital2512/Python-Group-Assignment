@@ -3,68 +3,7 @@ import UniqueIDCreation
 import generalUtils
 import time
 
-def updateProfile(fileToCheck, IDNumber, role, password, ICNumber, fullName, email, phoneNumber, birthday, gender):
-    updatedProfile = False
-    capitalizedRole = role.upper()
-    updated_data = []  # To store updated data
-    with open(fileToCheck, "+r") as file:
-        for line in file:
-            values = line.strip().split(";")
-            if values[1] == str(IDNumber):
-                # Skip the line to delete it
-                updatedProfile = True
-                continue
-            updated_data.append(line)
-
-    # Add the updated line at the end
-    if updatedProfile == True: 
-        updated_data.append(f"{capitalizedRole};{IDNumber};{password};{ICNumber};{fullName};{email};{phoneNumber};{gender};{birthday}\n")
-
-    # Write the updated data back to the file
-        with open(fileToCheck, "+w") as file:
-            file.writelines(updated_data)
-    return updatedProfile
-
-
-def updateClassInfo(fileToCheck, classCode, time, location, date, className, classForm):
-    updatedClass = False
-    updated_data = []  # To store updated data
-    with open(fileToCheck, "+r") as file:
-        for line in file:
-            values = line.strip().split(";")
-            if values[1] == str(classCode):
-                # Skip the line to delete it
-                updatedProfile = True
-                continue
-            updated_data.append(line)
-
-    # Add the updated line at the end
-    if updatedClass == True: 
-        updated_data.append(f"{classCode};{className};{classForm}{location};{date};{time};")
-
-    # Write the updated data back to the file
-        with open(fileToCheck, "+w") as file:
-            file.writelines(updated_data)
-    return updatedClass
-
-def readClassAssigned(fileName, indexOfClassCode, numberOfSubjects):
-    classCodeAssigned = []
-    for i in range(indexOfClassCode, numberOfSubjects, 1):
-        with open(fileName, "r") as file:
-            for line in file:
-                values = line.strip().split(";")
-                classCodeAssigned.append(values[indexOfClassCode])
-    return classCodeAssigned
-
-def addClassInfo(classFileName, classCode, className, classForm, classTime, classLocation, classDay):
-    classInfoAdded = False
-    with open(classFileName, "a") as classFile:
-        classInfo = f"{classCode};{className};{classForm};{classDay};{classTime};{classLocation}\n"
-        classFile.write(classInfo)
-        classInfoAdded = True
-        return classInfoAdded
-
-def addClassSchedule(scheduleFileName,classCode,classTime, classLocation, classDay):
+def addClassSchedule(scheduleFileName, classCode, classTime, classLocation, classDay):
     classScheduleAdded = False
     scheduleList = []
     with open(scheduleFileName, "r") as scheduleFile:
@@ -85,23 +24,6 @@ def addClassSchedule(scheduleFileName,classCode,classTime, classLocation, classD
 
     return classScheduleAdded  # Class added successfully
 
-def deleteClassInfo(classFileName, classCode, className, classForm, classTime, classLocation, classDay):
-    deletedClass = False
-    classString = f"{classCode};{className};{classForm};{classDay};{classTime};{classLocation};\n"
-    updatedClass = []
-    with open(classFileName, "r") as classFile:
-        lines = classFile.readlines()
-    for line in lines:
-        if line == classString: 
-            deletedClass = True
-            continue
-        else:
-            updatedClass.append(line)
-
-    with open(classFileName, "w") as classFile:
-        classFile.writelines(updatedClass)
-    return deletedClass
-
 def deleteClassSchedule(scheduleFileName, classCode, classTime, classLocation, classDay):
     updatedSchedule = []
     scheduleUpdated = False
@@ -117,11 +39,87 @@ def deleteClassSchedule(scheduleFileName, classCode, classTime, classLocation, c
     if scheduleUpdated == True:
         updatedString = f"{classLocation};{classDay};{classTime};N/A;AVAILABLE"
         updatedSchedule.append(updatedString)
-    with open(scheduleFileName, "+w") as file:
+    with open(scheduleFileName, "w") as file:
         file.writelines(updatedSchedule)
 
     return scheduleUpdated
 
+def addClassInfo(classFileName, classCode, className, classForm, classTime, classLocation, classDay):
+    classInfoAdded = False
+    with open(classFileName, "a") as classFile:
+        classInfo = f"{classCode};{className};{classForm};{classDay};{classTime};{classLocation}\n"
+        classFile.write(classInfo)
+        classInfoAdded = True
+        return classInfoAdded
+
+def deleteClassInfo(classFileName, classCode, className, classForm, classTime, classLocation, classDay):
+    deletedClass = False
+    classString = f"{classCode};{className};{classForm};{classDay};{classTime};{classLocation};\n"
+    updatedClass = []
+    with open(classFileName, "r") as classFile:
+        lines = classFile.readlines()
+    for line in lines:
+        if line == classString:
+            deletedClass = True
+            continue
+        else:
+            updatedClass.append(line)
+
+    with open(classFileName, "w") as classFile:
+        classFile.writelines(updatedClass)
+    return deletedClass
+
+def updateClassInfo(fileToCheck, classCode, time, location, date, className, classForm):
+    updatedClass = False
+    updated_data = []  # To store updated data
+    with open(fileToCheck, "r") as file:
+        for line in file:
+            values = line.strip().split(";")
+            if values[1] == str(classCode):
+                # Skip the line to delete it
+                updatedClass = True
+                continue
+            updated_data.append(line)
+
+    # Add the updated line at the end
+    if updatedClass == True:
+        updated_data.append(f"{classCode};{className};{classForm}{location};{date};{time};")
+
+        # Write the updated data back to the file
+        with open(fileToCheck, "w") as file:
+            file.writelines(updated_data)
+    return updatedClass
+
+def readClassAssigned(fileName, indexOfClassCode, numberOfSubjects):
+    classCodeAssigned = []
+    for i in range(indexOfClassCode, numberOfSubjects, 1):
+        with open(fileName, "r") as file:
+            for line in file:
+                values = line.strip().split(";")
+                classCodeAssigned.append(values[indexOfClassCode])
+    return classCodeAssigned
+
+def updateProfile(fileToCheck, IDNumber, role, password, ICNumber, fullName, email, phoneNumber, birthday, gender):
+    updatedProfile = False
+    capitalizedRole = role.upper()
+    updated_data = []  # To store updated data
+    with open(fileToCheck, "r") as file:
+        for line in file:
+            values = line.strip().split(";")
+            if values[1] == str(IDNumber):
+                # Skip the line to delete it
+                updatedProfile = True
+                continue
+            updated_data.append(line)
+
+    # Add the updated line at the end
+    if updatedProfile == True:
+        updated_data.append(f"{capitalizedRole};{IDNumber};{password};{ICNumber};{fullName};{email};{phoneNumber};{gender};{birthday}\n")
+
+        # Write the updated data back to the file
+        with open(fileToCheck, "w") as file:
+            file.writelines(updated_data)
+    return updatedProfile
           
 def pgTutor(userID):
     subjectCodeList = []
@@ -131,7 +129,7 @@ def pgTutor(userID):
     while True:
         generalUtils.clearConsole()
         generalUtils.createNewLine()
-        with open("UserDetails.txt", "+r") as file:
+        with open("UserDetails.txt", "r") as file:
             for line in file:
                 values = line.strip().split(";")
                 if values[1] == userID:
@@ -149,7 +147,7 @@ def pgTutor(userID):
         # Print subjectCodeList after the loop
         subjectAssigned = subjectCodeList.pop()
         print(f"Classes assigned: {subjectAssigned}")
-        print("1. Change classes\n2. Update class info\n3. View class info\n4. Update Profile\n5. View Profile\n6. Log Out")
+        print("1. Change classes\n2. Update class information\n3. View class information\n4. Update Profile\n5. View Profile\n6. View Students Enrolled \n7.Log Out")
         generalUtils.createNewLine()
         choice = input("Choice: ")
         if choice == "1":
@@ -210,7 +208,7 @@ def pgTutor(userID):
                             continue
                     generalUtils.clearConsole()
                     generalUtils.createNewLine()
-                    print(f"Class code: {classCode}\nClass name: {className}\nClass Form: {classForm}\nClass Day: {classDay.capitalize()}\nClass Time: {classTime}\nClass Location: {classLocation}")
+                    print(f"Class code: {classCode}\nClass name: {formattedClassName}\nClass Form: {formattedClassForm}\nClass Day: {classDay.capitalize()}\nClass Time: {classTime}\nClass Location: {classLocation}")
                     while True:
                         doneView = input("Is this correct? (Press Y/N)?")
                         if doneView == "Y":
@@ -281,11 +279,11 @@ def pgTutor(userID):
                             continue
                     generalUtils.clearConsole()
                     generalUtils.createNewLine()
-                    print(f"Class code: {classCode}\nClass name: {className}\nClass Form: {classForm}\nClass Day: {classDay}\nClass Time: {classTime}\nClass Location: {classLocation}")
+                    print(f"Class code: {classCode}\nClass name: {formattedClassName}\nClass Form: {formattedClassForm}\nClass Day: {classDay}\nClass Time: {classTime}\nClass Location: {classLocation}")
                     while True:
                         doneView = input("Confirm (Press Y/N)?")
                         if doneView == "Y":
-                            if deleteClassInfo("ClassSchedule.txt", "ClassInfo.txt", classCode, formattedClassName, classForm, classTime, classLocation, classDay) and deleteClassSchedule("ClassSchedule.txt", classCode, classTime, classLocation, classDay) == True:
+                            if deleteClassInfo( "ClassInfo.txt", classCode, formattedClassName, classForm, classTime, classLocation, classDay) and deleteClassSchedule("ClassSchedule.txt", classCode, classTime, classLocation, classDay) == True:
                                 print("Error: Class not deleted")
                                 time.sleep(3)
                             else:
@@ -336,10 +334,10 @@ def pgTutor(userID):
                         break
                     else:
                         continue
-                updateClassInfo("ClassScehdule.txt", classCode, classTime, classLocation, classDate, className, classForm)
+                updateClassInfo("ClassInfo.txt", classCode, classTime, classLocation, classDate, className, classForm)
         elif choice == "3":
             print("View class info")
-            existingClassCode = readClassAssigned("SubjectInfo.txt", 0)
+            existingClassCode = readClassAssigned("SubjectInfo.txt", 0,)
             while True:
                 classCode = input("Class Code: ").upper()
                 if classCode in existingClassCode:
@@ -353,7 +351,6 @@ def pgTutor(userID):
             classLocation = database.readListValue(classCode, 0, 5,"ClassInfo.txt")
             print(f"Class Code: {classCode}\nClass Name: {className}\nClass Form: {classForm}\nClass Date: {classDate}\nClass Time: {classTime}\nClass Location: {classLocation}")
         elif choice == "4":
-            print("Update profile")
             generalUtils.clearConsole()
             generalUtils.createNewLine()
             print("Update Profile")
@@ -383,8 +380,8 @@ def pgTutor(userID):
                 print("Is this correct? Y/N ")
                 confirmationChoice = input("Choice: ").upper()
                 if confirmationChoice == "Y":
-                    if updateProfile("UserDetails.txt", userID, "RECEPTIONIST",password,ICNumber,fullName,email,phoneNumber,birthday,gender) == True:
-                        print("Profile Updated")
+                    if updateProfile("UserDetails.txt", userID, "TUTOR",password,ICNumber,fullName,email,phoneNumber,birthday,gender) == True:
+                        print("Profile updated")
                         break
                 elif confirmationChoice == "N":
                     print("Profile not updated")
@@ -410,13 +407,16 @@ def pgTutor(userID):
             while True:
                 print("Done Viewing(Enter Y when you are done)? ")
                 generalUtils.createNewLine()
-                doneViewing = input("Choice: ").upper()
-                if doneViewing == "Y":
+                doneView = input("Choice: ").upper()
+                if doneView == "Y":
                     break
                 else:
                     continue
         elif choice == "6":
+            print("View students enrolled")
+
+        elif choice == "7":
             print("Log out")
             return "LOGOUT"
 
-        
+pgTutor("T001")
