@@ -24,8 +24,8 @@ def generateReceptionistID(existingIDs):
                 pass
     newNumber = maxNumber + 1
     formattedNewNumber = f"{newNumber:03d}"
-    newTutorID = f"R{formattedNewNumber}"
-    return newTutorID
+    newReceptionistID = f"R{formattedNewNumber}"
+    return newReceptionistID
 
 def generateAdminID(existingIDs):
     maxNumber = 0
@@ -38,8 +38,8 @@ def generateAdminID(existingIDs):
                 pass
     newNumber = maxNumber + 1
     formattedNewNumber = f"{newNumber:03d}"
-    newTutorID = f"A{formattedNewNumber}"
-    return newTutorID
+    newStudentID = f"A{formattedNewNumber}"
+    return newStudentID
 
 def generateStudentID(existingIDs):
     maxNumber = 0
@@ -52,30 +52,16 @@ def generateStudentID(existingIDs):
                 pass
     newNumber = maxNumber + 1
     formattedNewNumber = f"{newNumber:03d}"
-    newTutorID = f"S{formattedNewNumber}"
-    return newTutorID
-
-def generateTutorID(existingIDs):
-    maxNumber = 0
-    for ID in existingIDs:
-        if ID.startswith("T"):
-            try:
-                number = int(ID[1:])
-                maxNumber = max(maxNumber, number)
-            except ValueError:
-                pass
-    newNumber = maxNumber + 1
-    formattedNewNumber = f"{newNumber:03d}"
-    newTutorID = f"T{formattedNewNumber}"
-    return newTutorID
+    newStudentID = f"S{formattedNewNumber}"
+    return newStudentID
 
 def generateRequestID(existingIDs):
     maxNumber = 0
     for ID in existingIDs:
         if ID.startswith("REQ"):
             try:
-                number= int(ID[1:])
-                maxNumber = max(maxNumber,number)
+                number = int(ID[3:])
+                maxNumber = max(maxNumber, number)
             except ValueError:
                 pass
     newNumber = maxNumber + 1
@@ -96,3 +82,33 @@ def generatePaymentID(existingIDs):
     formattedNewNumber = f"{newNumber:03d}"
     newPaymentID = f"P{formattedNewNumber}"
     return newPaymentID
+
+def generateReceiptID(existingIDs):
+    maxNumber = 0
+    for ID in existingIDs:
+        if ID.startswith("REC"):
+            try:
+                number = int(ID[3:])
+                maxNumber = max(maxNumber, number)
+            except ValueError:
+                pass
+    newNumber = maxNumber + 1
+    formattedNewNumber = f"{newNumber:03d}"
+    newReceiptID = f"REC{formattedNewNumber}"
+    return newReceiptID
+
+def generateTutorID(existingIDs):
+    maxNumber = 0
+    for ID in existingIDs:
+        if ID.startswith("T"):
+            try:
+                number = int(ID[1:])
+                maxNumber = max(maxNumber, number)
+            except ValueError:
+                pass
+    newNumber = maxNumber + 1
+    formattedNewNumber = f"{newNumber:03d}"
+    newTutorID = f"T{formattedNewNumber}"
+    return newTutorID
+
+# problem with 3 letters id creations

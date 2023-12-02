@@ -4,15 +4,20 @@ import time
 import database
 import generalUtils
 import receptionist
+import student
+import admin
+import tutor
 
 def pgMain():
     while True: 
         generalUtils.clearConsole()
         generalUtils.createNewLine()
-        print("Welcome to Excellent Tution Centre(ETC)\n1. LOGIN\n2. EXIT")
+        print("Welcome to Excellent Tution Centre(ETC)")
         generalUtils.createNewLine()
-        choice = int(input("Choice: "))
-        if choice == 1: 
+        print("1. LOGIN\n2. EXIT")
+        generalUtils.createNewLine()
+        choice = input("Choice: ")
+        if choice == "1": 
             #Login 
             generalUtils.clearConsole()
             generalUtils.createNewLine()
@@ -45,29 +50,45 @@ def pgMain():
                 capitalizedRole = roleFound.upper()
                 if capitalizedRole == "ADMIN":
                     print("Admin")
-                    break
+                    result = admin.pgAdmin(inputUsername)
+                    if result == "LOGOUT":
+                        continue
+                    else: 
+                        print("Role Not Found")
+                        break
                     # Add code to navigate to the admin's page here
                 elif capitalizedRole == "TUTOR":
                     print("Tutor")
-                    break
+                    result = tutor.pgTutor(inputUsername)
+                    if result == "LOGOUT":
+                        continue
+                    else: 
+                        print("Role Not Found")
+                        break
                     # Add code to navigate to the tutor's page here
                 elif capitalizedRole == "STUDENT":
                     print("Student")
-                    break
+                    result = student.pgStudent(inputUsername)
+                    if result == "LOGOUT":
+                        continue
+                    else: 
+                        print("Role Not Found")
+                        break
                     # Add code to navigate to the student's page here
                 elif capitalizedRole == "RECEPTIONIST":
                     print("Receptionist")
                     result = receptionist.pgReceptionist(inputUsername)
                     if result == "LOGOUT":
                         continue
-                else: 
-                    print("Role Not Found")
-                    break
+                    else: 
+                        print("Role Not Found")
+                        break
+                    # Add code to navigate to the receptionist's page here
             else: 
-                print("Your account might have been deleted (If you think this is a mistake, please contact the Admin)")
+                print("Your account could not be accessed (If you think this is a mistake, please contact the Admin)")
                 break
 
-        elif choice == 2:
+        elif choice == "2":
             print("\nThank you for visiting TEC")
             sys.exit()
 
