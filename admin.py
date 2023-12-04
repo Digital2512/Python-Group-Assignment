@@ -250,7 +250,7 @@ def pgAdmin(userID):
             print("1. Update Admin Profile\n2. Exit")
             generalUtils.createNewLine()
             updateProfileChoice = input("Choice: ")
-            if updateProfile == "1":
+            if updateProfileChoice == "1":
                 password = input("Password:")
                 email = input("\nEmail:")
                 fullName = input("\nFull Name:")
