@@ -110,5 +110,3 @@ def generateTutorID(existingIDs):
     formattedNewNumber = f"{newNumber:03d}"
     newTutorID = f"T{formattedNewNumber}"
     return newTutorID
-
-# problem with 3 letters id creations
