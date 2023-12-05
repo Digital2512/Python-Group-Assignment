@@ -61,23 +61,20 @@ def pgAdmin(userID):
         generalUtils.createNewLine()
         choice = input("Choice:")
         if choice == "1":
-            existingIDs = UniqueIDCreation.readIDFromExistingFile("UserDetails.txt",0)
-            generalUtils.clearConsole()
-            generalUtils.createNewLine()
-            print("Register:")
-            generalUtils.createNewLine()
-            print("1.Receptionist\n2.Tutor\n3. Exit")
-            generalUtils.createNewLine()
-            choiceRegister = input("Choice:")
-            if choiceRegister == "1":
+            while True:
+                existingIDs = UniqueIDCreation.readIDFromExistingFile("UserDetails.txt",0)
                 generalUtils.clearConsole()
                 generalUtils.createNewLine()
-                print("Register Receptonist")
+                print("Register:")
                 generalUtils.createNewLine()
-                print("1. Register Receptionist\n2. Exit")
+                print("1.Receptionist\n2.Tutor\n3.Exit")
                 generalUtils.createNewLine()
-                registerReceptionistChoice = input("Choice: ")
-                if registerReceptionistChoice == "1":
+                choiceRegister = input("Choice:")
+                if choiceRegister == "1":
+                    generalUtils.clearConsole()
+                    generalUtils.createNewLine()
+                    print("Register Receptonist")
+                    generalUtils.createNewLine()
                     existingIDs = UniqueIDCreation.readIDFromExistingFile("UserDetails.txt", 1)
                     receptionistUserID = UniqueIDCreation.generateReceptionistID(existingIDs)
                     print(f"Receptionist ID: {receptionistUserID}\n")
@@ -100,21 +97,12 @@ def pgAdmin(userID):
                         else: 
                             continue
                     generalUtils.clearConsole()
-                elif registerReceptionistChoice == "2":
-                    break
-                else:
-                    continue
-                break
-            elif choiceRegister == "2":
-                listOfSubject = []
-                generalUtils.clearConsole()
-                generalUtils.createNewLine()
-                print("Register Tutor")
-                generalUtils.createNewLine()
-                print("1. Register Tutor\n2. Exit")
-                generalUtils.createNewLine()
-                registerTutorChoice = input("Choice")
-                if registerTutorChoice == "1":
+                elif choiceRegister == "2":
+                    listOfSubject = []
+                    generalUtils.clearConsole()
+                    generalUtils.createNewLine()
+                    print("Register Tutor")
+                    generalUtils.createNewLine()
                     existingIDs = UniqueIDCreation.readIDFromExistingFile("UserDetails.txt", 1)
                     tutorUserID = UniqueIDCreation.generateTutorID(existingIDs)
                     print(f"Tutor ID: {tutorUserID}\n")
@@ -153,16 +141,11 @@ def pgAdmin(userID):
                         else: 
                             continue
                     generalUtils.clearConsole()
-                elif registerTutorChoice == "2":
+                    break
+                elif choiceRegister == "3":
                     break
                 else:
                     continue
-                break
-            elif choiceRegister == "3":
-                break
-            else:
-                continue
-            break
         elif choice == "2":
             generalUtils.clearConsole()
             generalUtils.createNewLine()
