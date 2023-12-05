@@ -543,5 +543,3 @@ def pgTutor(userID):
         elif choice == "6":
             print("Log out")
             return "LOGOUT"
-
-        

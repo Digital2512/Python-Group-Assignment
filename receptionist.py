@@ -320,8 +320,8 @@ def pgReceptionist(userID):
                 generalUtils.createNewLine()
                 print("1. Register Student\n2. Exit")
                 generalUtils.createNewLine()
-                registerStudent = input("Choice: ")
-                if registerStudent == "1":
+                registerStudentChoice = input("Choice: ")
+                if registerStudentChoice == "1":
                     existingIDList = UniqueIDCreation.readIDFromExistingFile("UserDetails.txt", 1)
                     studentIDNumber = UniqueIDCreation.generateStudentID(existingIDList)
                     print(f"Student ID: {studentIDNumber}")
@@ -431,7 +431,8 @@ def pgReceptionist(userID):
                             else:
                                 continue
                         break
-                elif registerStudent == "2":
+                    break
+                elif registerStudentChoice == "2":
                     break
                 else:
                     continue

@@ -74,76 +74,95 @@ def pgAdmin(userID):
                 generalUtils.createNewLine()
                 print("Register Receptonist")
                 generalUtils.createNewLine()
-                existingIDs = UniqueIDCreation.readIDFromExistingFile("UserDetails.txt", 1)
-                receptionistUserID = UniqueIDCreation.generateReceptionistID(existingIDs)
-                print(f"Receptionist ID: {receptionistUserID}\n")
-                password = input("Password:")
-                generalUtils.clearConsole()
+                print("1. Register Receptionist\n2. Exit")
                 generalUtils.createNewLine()
-                print(f"Profile\n\nUser ID: {receptionistUserID}\nPassword: {password}")
-                generalUtils.createNewLine()
-                while True: 
-                    confirmationChoice = input("Is this correct(Y/N?)").upper()
-                    if confirmationChoice == "Y":
-                        registerReceptionist(receptionistUserID,password)
-                        print("\nReceptonist registered")
-                        time.sleep(3)
-                        break
-                    elif confirmationChoice == "N":
-                        print("\nReceptonist not registered")
-                        time.sleep(3)
-                        break
-                    else: 
-                        continue
-                generalUtils.clearConsole()
+                registerReceptionistChoice = input("Choice: ")
+                if registerReceptionistChoice == "1":
+                    existingIDs = UniqueIDCreation.readIDFromExistingFile("UserDetails.txt", 1)
+                    receptionistUserID = UniqueIDCreation.generateReceptionistID(existingIDs)
+                    print(f"Receptionist ID: {receptionistUserID}\n")
+                    password = input("Password:")
+                    generalUtils.clearConsole()
+                    generalUtils.createNewLine()
+                    print(f"Profile\n\nUser ID: {receptionistUserID}\nPassword: {password}")
+                    generalUtils.createNewLine()
+                    while True: 
+                        confirmationChoice = input("Is this correct(Y/N?)").upper()
+                        if confirmationChoice == "Y":
+                            registerReceptionist(receptionistUserID,password)
+                            print("\nReceptonist registered")
+                            time.sleep(3)
+                            break
+                        elif confirmationChoice == "N":
+                            print("\nReceptonist not registered")
+                            time.sleep(3)
+                            break
+                        else: 
+                            continue
+                    generalUtils.clearConsole()
+                elif registerReceptionistChoice == "2":
+                    break
+                else:
+                    continue
+                break
             elif choiceRegister == "2":
                 listOfSubject = []
                 generalUtils.clearConsole()
                 generalUtils.createNewLine()
                 print("Register Tutor")
                 generalUtils.createNewLine()
-                existingIDs = UniqueIDCreation.readIDFromExistingFile("UserDetails.txt", 1)
-                tutorUserID = UniqueIDCreation.generateTutorID(existingIDs)
-                print(f"Tutor ID: {tutorUserID}\n")
-                password = input("Password:")
-                numberOfSubjects = int(input("\nNumber of Subjects: "))
+                print("1. Register Tutor\n2. Exit")
                 generalUtils.createNewLine()
-                while len(listOfSubject) != numberOfSubjects: 
-                    while True:
-                        print("Choose the subjects: ")
-                        generalUtils.createNewLine()
-                        print("Chinese - CHF1\nEnglish - ENF1\nMalay- MAF1\nMathemathics - MTHF1\nAdditional Mathemathics - AMTHF1\nGeneral Commerce - GCF1\nGeneral Science - GSF1\nnChinese - CHF2\nEnglish - ENF2\nMalay- MAF2\nMathemathics - MTHF2\nAdditional Mathemathics - AMTHF2\nGeneral Commerce - GCF2\nGeneral Science - GSF2\nChinese - CHF3\nEnglish - ENF3\nMalay- MAF3\nMathemathics - MTHF3\nAdditional Mathemathics - AMTHF3\nGeneral Commerce - GCF3\nGeneral Science - GSF3\nChinese - CHF4\nEnglish - ENF4\nMalay - MAF4\nMathemathics - MTHF4\nAdditional Mathemathics - AMTHF4\nAccounting - ACF4\nEconomics - ECF4\nBusiness Studies - BSF4\nPhysics - PHF4\nChemistry - CHMF4\nBiology - BIOF4\nChinese - CHF5\nEnglish - ENF5\nMalay - MAF5\nMathemathics - MTHF5\nAdditional Mathemathics - AMTHF5\nAccounting - ACF5\nEconomics - ECF5\nBusiness Studies - BSF5\nPhysics - PHF5\nChemistry - CHMF5\nBiology - BIOF5")
-                        generalUtils.createNewLine()
-                        subject = input("Subject Code: ").upper()
-                        if subject in subjectCode:
-                            listOfSubject.append(subject)
+                registerTutorChoice = input("Choice")
+                if registerTutorChoice == "1":
+                    existingIDs = UniqueIDCreation.readIDFromExistingFile("UserDetails.txt", 1)
+                    tutorUserID = UniqueIDCreation.generateTutorID(existingIDs)
+                    print(f"Tutor ID: {tutorUserID}\n")
+                    password = input("Password:")
+                    numberOfSubjects = int(input("\nNumber of Subjects: "))
+                    generalUtils.createNewLine()
+                    while len(listOfSubject) != numberOfSubjects: 
+                        while True:
+                            print("Choose the subjects: ")
+                            generalUtils.createNewLine()
+                            print("Chinese - CHF1\nEnglish - ENF1\nMalay- MAF1\nMathemathics - MTHF1\nAdditional Mathemathics - AMTHF1\nGeneral Commerce - GCF1\nGeneral Science - GSF1\nnChinese - CHF2\nEnglish - ENF2\nMalay- MAF2\nMathemathics - MTHF2\nAdditional Mathemathics - AMTHF2\nGeneral Commerce - GCF2\nGeneral Science - GSF2\nChinese - CHF3\nEnglish - ENF3\nMalay- MAF3\nMathemathics - MTHF3\nAdditional Mathemathics - AMTHF3\nGeneral Commerce - GCF3\nGeneral Science - GSF3\nChinese - CHF4\nEnglish - ENF4\nMalay - MAF4\nMathemathics - MTHF4\nAdditional Mathemathics - AMTHF4\nAccounting - ACF4\nEconomics - ECF4\nBusiness Studies - BSF4\nPhysics - PHF4\nChemistry - CHMF4\nBiology - BIOF4\nChinese - CHF5\nEnglish - ENF5\nMalay - MAF5\nMathemathics - MTHF5\nAdditional Mathemathics - AMTHF5\nAccounting - ACF5\nEconomics - ECF5\nBusiness Studies - BSF5\nPhysics - PHF5\nChemistry - CHMF5\nBiology - BIOF5")
+                            generalUtils.createNewLine()
+                            subject = input("Subject Code: ").upper()
+                            if subject in subjectCode:
+                                listOfSubject.append(subject)
+                                break
+                            else:
+                                print("\nSubject code not found")
+                                time.sleep(2)
+                                continue
+                    generalUtils.clearConsole()
+                    generalUtils.createNewLine()
+                    print(f"Profile\n\nUser ID: {tutorUserID}\nPassword: {password}\nNumber of Subjects: {numberOfSubjects}\nSubjects: {listOfSubject}")
+                    generalUtils.createNewLine()
+                    while True: 
+                        confirmationChoice = input("Is this correct(Y/N?)").upper()
+                        if confirmationChoice == "Y":
+                            registerTutor(tutorUserID,password,listOfSubject, numberOfSubjects)
+                            print("\nTutor Registered")
+                            time.sleep(3)
                             break
-                        else:
-                            print("\nSubject code not found")
-                            time.sleep(2)
+                        elif confirmationChoice == "N":
+                            print("\nTutor not registered")
+                            time.sleep(3)
+                            break
+                        else: 
                             continue
-                generalUtils.clearConsole()
-                generalUtils.createNewLine()
-                print(f"Profile\n\nUser ID: {tutorUserID}\nPassword: {password}\nNumber of Subjects: {numberOfSubjects}\nSubjects: {listOfSubject}")
-                generalUtils.createNewLine()
-                while True: 
-                    confirmationChoice = input("Is this correct(Y/N?)").upper()
-                    if confirmationChoice == "Y":
-                        registerTutor(tutorUserID,password,listOfSubject, numberOfSubjects)
-                        print("\nTutor Registered")
-                        time.sleep(3)
-                        break
-                    elif confirmationChoice == "N":
-                        print("\nTutor not registered")
-                        time.sleep(3)
-                        break
-                    else: 
-                        continue
-                generalUtils.clearConsole()
+                    generalUtils.clearConsole()
+                elif registerTutorChoice == "2":
+                    break
+                else:
+                    continue
+                break
             elif choiceRegister == "3":
                 break
             else:
                 continue
+            break
         elif choice == "2":
             generalUtils.clearConsole()
             generalUtils.createNewLine()
