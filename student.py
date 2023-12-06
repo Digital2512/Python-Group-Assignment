@@ -179,30 +179,39 @@ def pgStudent(userID):
                     print(f"Request List: {requestList}")
                     generalUtils.createNewLine()
                     while True:
-                        deleteRequestID = input("Request ID: ")
-                        if deleteRequestID in requestList:
+                        print("1. Delete request\n2. Exit")
+                        generalUtils.createNewLine()
+                        deleteSubjectRequestChoice = input("Choice")
+                        if deleteSubjectRequestChoice == "1":
+                            while True:
+                                deleteRequestID = input("Request ID: ")
+                                if deleteRequestID in requestList:
+                                    break
+                                else:
+                                    print("\nError: Payment Request ID not found")
+                                    time.sleep(2)
+                                    continue
+                            generalUtils.createNewLine()
+                            while True:
+                                confirmationChoice = input("Confirm(Y/N)? ").upper()
+                                if confirmationChoice == "Y":
+                                    if deleteIfStatus("StudentRequest.txt", deleteRequestID,"PENDING") == True:
+                                        print("\nSubject change request has been deleted")
+                                        time.sleep(3)
+                                    else: 
+                                        print("Subject Request has not deleted (Subject Request has either been approved or rejected)")
+                                        time.sleep(3)
+                                elif confirmationChoice == "N":
+                                    print("\nSubject change request not deleted")
+                                    break
+                                generalUtils.createNewLine()
+                                generalUtils.clearConsole()
+                                break
+                            break
+                        elif deleteSubjectRequestChoice == "2":
                             break
                         else:
-                            print("\nError: Payment Request ID not found")
-                            time.sleep(2)
                             continue
-                    generalUtils.createNewLine()
-                    while True:
-                        confirmationChoice = input("Confirm(Y/N)? ").upper()
-                        if confirmationChoice == "Y":
-                            if deleteIfStatus("StudentRequest.txt", deleteRequestID,"PENDING") == True:
-                                print("\nSubject change request has been deleted")
-                                time.sleep(3)
-                            else: 
-                                print("Subject Request has not deleted (Subject Request has either been approved or rejected)")
-                                time.sleep(3)
-                        elif confirmationChoice == "N":
-                            print("\nSubject change request not deleted")
-                            break
-                        generalUtils.createNewLine()
-                        generalUtils.clearConsole()
-                        break
-                    break
                 elif choiceRequest == "3":
                     generalUtils.clearConsole()
                     generalUtils.createNewLine()
@@ -221,33 +230,44 @@ def pgStudent(userID):
                     print(f"Request List: {requestList}")
                     generalUtils.createNewLine()
                     while True:
-                        viewRequestID = input("Request ID: ")
-                        if viewRequestID in requestList:
-                            break
-                        else:
-                            print("\nError: Payment Request ID not found")
-                            time.sleep(2)
-                            continue
-                    with open ("StudentRequest.txt", "+r") as file:
-                        lines = file.readlines()
-                    for line in lines:
-                        values = line.strip().split(";")
-                        if values[0] == viewRequestID:
-                            generalUtils.createNewLine()
-                            print(f"Request ID: {viewRequestID}\nStudent ID: {values[1]}\nStudent Name: {values[2].replace('_',' ')}\nCurrent Subject: {values[3]}\nRequested Subject: {values[4]}\nStatus: {values[5]}")
-                            if values[5] == "APPROVED":
-                                deleteIfStatus("StudentRequest.txt", viewRequestID, "APPROVED")
-                            elif values[5] == "REJECTED":
-                                deleteIfStatus("StudentRequest.txt", viewRequestID, "REJECTED")
-                            generalUtils.createNewLine()
+                        print("1. View Request\n2. Exit")
+                        generalUtils.createNewLine()
+                        viewStudentRequest = input("Choice: ")
+                        if viewStudentRequest == "1":
                             while True:
-                                doneViewingChoice = input("Done Viewing(Y/N)?").upper()
-                                if doneViewingChoice == "Y":
+                                viewRequestID = input("Request ID: ").upper()
+                                if viewRequestID in requestList:
+                                    break
+                                if viewRequestID == "EXIT":
                                     break
                                 else:
+                                    print("\nError: Payment Request ID not found")
+                                    time.sleep(2)
                                     continue
-                    generalUtils.createNewLine()
-                    break
+                            with open ("StudentRequest.txt", "+r") as file:
+                                lines = file.readlines()
+                            for line in lines:
+                                values = line.strip().split(";")
+                                if values[0] == viewRequestID:
+                                    generalUtils.createNewLine()
+                                    print(f"Request ID: {viewRequestID}\nStudent ID: {values[1]}\nStudent Name: {values[2].replace('_',' ')}\nCurrent Subject: {values[3]}\nRequested Subject: {values[4]}\nStatus: {values[5]}")
+                                    if values[5] == "APPROVED":
+                                        deleteIfStatus("StudentRequest.txt", viewRequestID, "APPROVED")
+                                    elif values[5] == "REJECTED":
+                                        deleteIfStatus("StudentRequest.txt", viewRequestID, "REJECTED")
+                                    generalUtils.createNewLine()
+                                    while True:
+                                        doneViewingChoice = input("Done Viewing(Y/N)?").upper()
+                                        if doneViewingChoice == "Y":
+                                            break
+                                        else:
+                                            continue
+                            generalUtils.createNewLine()
+                            break
+                        elif viewStudentRequest == "2":
+                            break
+                        else:
+                            continue
                 elif choiceRequest == "4":
                     break
                 else: 
@@ -303,7 +323,6 @@ def pgStudent(userID):
                             break
                         else:
                             continue
-                    break
                 elif choiceRequest == "2":
                     generalUtils.clearConsole()
                     generalUtils.createNewLine()
@@ -322,28 +341,36 @@ def pgStudent(userID):
                     print(f"Request List: {requestList}")
                     generalUtils.createNewLine()
                     while True:
-                        deleteRequestID = input("Payment ID: ")
-                        if deleteRequestID in requestList:
+                        print("1. Delete Request\n2. Exit")
+                        deletePaymentChoice = input("Choice: ")
+                        if deletePaymentChoice == "1":
+                            while True:
+                                deleteRequestID = input("Payment ID: ")
+                                if deleteRequestID in requestList:
+                                    break
+                                else:
+                                    print("\nError: Payment Request ID not found")
+                                    time.sleep(2)
+                                    continue
+                            generalUtils.createNewLine()
+                            paymentChoice = input("\nConfirm(Y/N)? ").upper()
+                            if paymentChoice == "Y":    
+                                if deleteIfStatus("PaymentRequest.txt", deleteRequestID,"PENDING") == True:
+                                        print("\nPayment request has been deleted")
+                                        time.sleep(3)
+                                else: 
+                                    print("\nPayment request is not deleted (Payment request have either been approved or rejected)")
+                                    time.sleep(3)
+                            elif paymentChoice == "N":
+                                print("\nPayment request not deleted")
+                                break
+                            else:
+                                continue
+                            break
+                        elif deletePaymentChoice == "2":
                             break
                         else:
-                            print("\nError: Payment Request ID not found")
-                            time.sleep(2)
                             continue
-                    generalUtils.createNewLine()
-                    paymentChoice = input("\nConfirm(Y/N)? ").upper()
-                    if paymentChoice == "Y":    
-                        if deleteIfStatus("PaymentRequest.txt", deleteRequestID,"PENDING") == True:
-                                print("\nPayment request has been deleted")
-                                time.sleep(3)
-                        else: 
-                            print("\nPayment request is not deleted (Payment request have either been approved or rejected)")
-                            time.sleep(3)
-                    elif paymentChoice == "N":
-                        print("\nPayment request not deleted")
-                        break
-                    else:
-                        continue
-                    break
                 elif choiceRequest == "3":
                     generalUtils.clearConsole()
                     generalUtils.createNewLine()
@@ -363,59 +390,68 @@ def pgStudent(userID):
                     print(f"Request List: {requestList}")
                     generalUtils.createNewLine()
                     while True:
-                        viewRequestID = input("Request ID: ")
-                        if viewRequestID in requestList:
+                        print("1. View Payment Request\n2. Exit")
+                        generalUtils.createNewLine()
+                        viewPaymentRequestChoice = input("Choice: ")
+                        if viewPaymentRequestChoice == "1":
+                            while True:
+                                viewRequestID = input("Request ID: ").upper()
+                                if viewRequestID in requestList:
+                                    break
+                                else:
+                                    print("\nError: Payment Request ID not found")
+                                    time.sleep(2)
+                                    continue
+                            with open ("PaymentRequest.txt", "+r") as file:
+                                lines = file.readlines()
+                            for line in lines:
+                                values = line.strip().split(";")
+                                if values[0] == viewRequestID:
+                                    requestIDNotFound = False
+                                    generalUtils.clearConsole()
+                                    generalUtils.createNewLine()
+                                    print(f"Request ID: {viewRequestID}\nStudent ID: {values[1]}\nStudent Name: {values[2].replace('_',' ')}\nSubject Code: {values[3]}\nAmount Paid: {values[4]}\nStatus: {values[5]}")
+                                    generalUtils.createNewLine()
+                                    if values[5] == "APPROVED":
+                                        viewReceipt = input("View Receipt(Y/N)? ").upper()
+                                        if viewReceipt == "Y":
+                                            generalUtils.createNewLine()
+                                            receiptID = database.readListValue(viewRequestID, 0, 6, "PaymentRequest.txt")
+                                            studentIDReceipt = database.readListValue(receiptID, 0, 1, "ReceiptCollection.txt")
+                                            studentNameReceipt = database.readListValue(receiptID, 0, 2, "ReceiptCollection.txt")
+                                            subjectCodeReceipt = database.readListValue(receiptID, 0, 3, "ReceiptCollection.txt")
+                                            amountReceipt = database.readListValue(receiptID, 0, 4, "ReceiptCollection.txt")
+                                            print(f"Receipt ID: {receiptID}\nStudent ID: {studentIDReceipt}\nStudent Name: {studentNameReceipt.replace('_',' ')}\nSubject Code: {subjectCodeReceipt}\nAmount: {amountReceipt}")
+                                            generalUtils.createNewLine()
+                                            doneViewReceipt = input("Are you done with viewing(Y/N)? ").upper()
+                                            if doneViewReceipt == "Y":
+                                                deleteIfStatus("PaymentRequest.txt", viewRequestID, "APPROVED")
+                                                print("\nReceipt received")
+                                                time.sleep(3)
+                                                break
+                                            else:
+                                                continue
+                                    elif values[5] == "REJECTED":
+                                        doneViewingChoice = input("Are you done with viewing(Y/N)? ").upper()
+                                        if doneViewingChoice == "Y":
+                                            deleteIfStatus("PaymentRequest.txt", viewRequestID, "REJECTED")
+                                            break
+                                        else:
+                                            continue
+                                    while True:
+                                        doneViewingChoice = input("Are you done with viewing(Y/N)? ").upper()
+                                        if doneViewingChoice == "Y":
+                                            break
+                                        else:
+                                            continue
+                            if requestIDNotFound:
+                                print("\nRequest ID Not Found")
+                                break
+                            break
+                        elif viewPaymentRequestChoice == "2":
                             break
                         else:
-                            print("\nError: Payment Request ID not found")
-                            time.sleep(2)
                             continue
-                    with open ("PaymentRequest.txt", "+r") as file:
-                        lines = file.readlines()
-                    for line in lines:
-                        values = line.strip().split(";")
-                        if values[0] == viewRequestID:
-                            requestIDNotFound = False
-                            generalUtils.clearConsole()
-                            generalUtils.createNewLine()
-                            print(f"Request ID: {viewRequestID}\nStudent ID: {values[1]}\nStudent Name: {values[2].replace('_',' ')}\nSubject Code: {values[3]}\nAmount Paid: {values[4]}\nStatus: {values[5]}")
-                            generalUtils.createNewLine()
-                            if values[5] == "APPROVED":
-                                viewReceipt = input("View Receipt(Y/N)? ").upper()
-                                if viewReceipt == "Y":
-                                    generalUtils.createNewLine()
-                                    receiptID = database.readListValue(viewRequestID, 0, 6, "PaymentRequest.txt")
-                                    studentIDReceipt = database.readListValue(receiptID, 0, 1, "ReceiptCollection.txt")
-                                    studentNameReceipt = database.readListValue(receiptID, 0, 2, "ReceiptCollection.txt")
-                                    subjectCodeReceipt = database.readListValue(receiptID, 0, 3, "ReceiptCollection.txt")
-                                    amountReceipt = database.readListValue(receiptID, 0, 4, "ReceiptCollection.txt")
-                                    print(f"Receipt ID: {receiptID}\nStudent ID: {studentIDReceipt}\nStudent Name: {studentNameReceipt.replace('_',' ')}\nSubject Code: {subjectCodeReceipt}\nAmount: {amountReceipt}")
-                                    generalUtils.createNewLine()
-                                    doneViewReceipt = input("Are you done with viewing(Y/N)? ").upper()
-                                    if doneViewReceipt == "Y":
-                                        deleteIfStatus("PaymentRequest.txt", viewRequestID, "APPROVED")
-                                        print("\nReceipt received")
-                                        time.sleep(3)
-                                        break
-                                    else:
-                                        continue
-                            elif values[5] == "REJECTED":
-                                doneViewingChoice = input("Are you done with viewing(Y/N)? ").upper()
-                                if doneViewingChoice == "Y":
-                                    deleteIfStatus("PaymentRequest.txt", viewRequestID, "REJECTED")
-                                    break
-                                else:
-                                    continue
-                            while True:
-                                doneViewingChoice = input("Are you done with viewing(Y/N)? ").upper()
-                                if doneViewingChoice == "Y":
-                                    break
-                                else:
-                                    continue
-                    if requestIDNotFound:
-                        print("\nRequest ID Not Found")
-                        break
-                    break
                 elif choiceRequest == "4":
                     break
                 else: 

@@ -467,7 +467,7 @@ def pgReceptionist(userID):
                                 print("Student deleted")
                                 time.sleep(3)
                                 generalUtils.createNewLine()
-                    break
+                        break
                 elif deleteStudentChoice == "2":
                     break
                 else: 

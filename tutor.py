@@ -79,7 +79,7 @@ def updateClassSchedule(fileToCheck, classCode, classTime, classLocation, classD
             file.writelines(updated_data)
     return updatedClass
 
-def updateClassInfo(fileToCheck, classCode, classTime, classLocation, classDay, className):
+def updateClassInfo(fileToCheck, classCode, classForm, classTime, classLocation, classDay, className):
     updatedClass = False
     updated_data = []  # To store updated data
     with open(fileToCheck, "+r") as file:
@@ -93,7 +93,7 @@ def updateClassInfo(fileToCheck, classCode, classTime, classLocation, classDay, 
 
     # Add the updated line at the end
     if updatedClass: 
-        updated_data.append(f"{classCode};{className};{classDay};{classTime};{classLocation};\n")
+        updated_data.append(f"{classCode};{className};{classForm};{classDay};{classTime};{classLocation};\n")
 
     # Write the updated data back to the file
         with open(fileToCheck, "+w") as file:
@@ -204,111 +204,19 @@ def pgTutor(userID):
         generalUtils.createNewLine()
         choice = input("Choice: ")
         if choice == "1":
-            generalUtils.clearConsole()
-            generalUtils.createNewLine()
-            print("Classes")
-            generalUtils.createNewLine()
-            print("1. Add classes \n2. Delete Classes")
-            generalUtils.createNewLine()
-            choiceClass = input("Choice: ")
-            if choiceClass == "1":
-                while True:
+            while True:
+                generalUtils.clearConsole()
+                generalUtils.createNewLine()
+                print("Classes")
+                generalUtils.createNewLine()
+                print("1. Add classes \n2. Delete Classes\n3. Exit")
+                generalUtils.createNewLine()
+                choiceClass = input("Choice: ")
+                if choiceClass == "1":
                     generalUtils.clearConsole()
                     generalUtils.createNewLine()
                     print("Add classes")
                     generalUtils.createNewLine()
-                    print("1. Add classes\n2. Exit")
-                    generalUtils.createNewLine()
-                    addChoice = input("Choice: ")
-                    if addChoice == "1":
-                        with open("UserDetails.txt", "r") as file:
-                            for line in file:
-                                values = line.strip().split(";")
-                                if values[1] == userID:
-                        # Print subjectCodeList after the loop
-                                    subjectAssigned = eval(values[11]) 
-                        print(f"Classes assigned: {subjectAssigned}")
-                        generalUtils.createNewLine()
-                        while True: 
-                            classCode = input("Class Code: ").upper()
-                            if classCode in subjectAssigned:
-                                break
-                            else:
-                                continue
-                        className = input("Class Name: ")
-                        formattedClassName = className.replace(" ","_")
-                        classForm = f"Form {classCode[-1:]}"
-                        formattedClassForm = classForm.replace(" ", "_")
-                        while True: 
-                            classDay = input("Day: ").upper()
-                            if classDay in days:
-                                break
-                            else: 
-                                continue
-                        while True:
-                            generalUtils.createNewLine()
-                            print("Timing")
-                            generalUtils.createNewLine()
-                            print("1. 12.00 - 14.00\n2. 14.00 - 16.00\n3. 16.00 - 18.00\n4. 18.00 - 20.00")
-                            generalUtils.createNewLine()
-                            timeChoice = [1,2,3,4]
-                            choiceTime = int(input("Choice: "))
-                            if choiceTime in timeChoice:
-                                if choiceTime == 1:
-                                    classTime = "12.00-14.00"
-                                    break
-                                elif choiceTime == 2:
-                                    classTime = "14.00-16.00"
-                                    break
-                                elif choiceTime == 3:
-                                    classTime = "16.00-18.00"
-                                    break
-                                elif choiceTime == 4:
-                                    classTime = "18.00-20.00"
-                                    break
-                            else: 
-                                continue
-                        while True: 
-                            classLocation = input("Location: ")
-                            if classLocation in classrooms:
-                                break
-                            else:
-                                continue
-                        generalUtils.clearConsole()
-                        generalUtils.createNewLine()
-                        print(f"Class code: {classCode}\nClass name: {className}\nClass Form: {classForm}\nClass Day: {classDay.capitalize()}\nClass Time: {classTime}\nClass Location: {classLocation}")
-                        while True:
-                            generalUtils.createNewLine()
-                            doneView = input("Is this correct(Y/N)? ").upper()
-                            if doneView == "Y":
-                                if addClassSchedule("ClassSchedule.txt", classCode, classTime, classLocation, classDay) == True:
-                                    if addClassInfo("ClassInfo.txt", classCode, formattedClassName, formattedClassForm, classTime, classLocation, classDay) == True:
-                                        print("\nClass added")
-                                        time.sleep(3)
-                                else:
-                                    print("\nClass not added")
-                                    time.sleep(3)
-                                break
-                            elif doneView == "N":
-                                print("\nClass not added")
-                                time.sleep(3)
-                                break
-                            else:
-                                continue
-                        break
-                    elif addChoice == "2":
-                        break
-                    else:
-                        continue
-            elif choiceClass == "2":
-                while True:
-                    generalUtils.clearConsole()
-                    generalUtils.createNewLine()
-                    print("Delete classes")
-                    generalUtils.createNewLine()
-                    print("1. Delete classes\n2. Exit")
-                    generalUtils.createNewLine()
-                    deleteChoice = input("Choice: ")
                     with open("UserDetails.txt", "r") as file:
                         for line in file:
                             values = line.strip().split(";")
@@ -323,31 +231,111 @@ def pgTutor(userID):
                             break
                         else:
                             continue
-                    generalUtils.clearConsole()
-                    generalUtils.createNewLine()
-                    print(f"Class code: {classCode}")
+                    className = input("Class Name: ")
+                    formattedClassName = className.replace(" ","_")
+                    classForm = f"Form {classCode[-1:]}"
+                    formattedClassForm = classForm.replace(" ", "_")
+                    while True: 
+                        classDay = input("Day: ").upper()
+                        if classDay in days:
+                            break
+                        else: 
+                            continue
                     while True:
                         generalUtils.createNewLine()
-                        deleteConfirmationChoice = input("Confirm (Press Y/N)?").upper()
-                        if deleteConfirmationChoice == "Y":
-                            if deleteClassSchedule("ClassSchedule.txt", classCode) == True:
-                                if deleteClassInfo("ClassInfo.txt", classCode) == True:
-                                    print("\nClass deleted")
-                                    time.sleep(3)
-                                    break
-                            else:
-                                print("Error: Class not deleted")
-                                time.sleep(3)
+                        print("Timing")
+                        generalUtils.createNewLine()
+                        print("1. 12.00 - 14.00\n2. 14.00 - 16.00\n3. 16.00 - 18.00\n4. 18.00 - 20.00")
+                        generalUtils.createNewLine()
+                        timeChoice = [1,2,3,4]
+                        choiceTime = int(input("Choice: "))
+                        if choiceTime in timeChoice:
+                            if choiceTime == 1:
+                                classTime = "12.00-14.00"
                                 break
-                        elif deleteConfirmationChoice == "N":
-                            print("Class not deleted")
+                            elif choiceTime == 2:
+                                classTime = "14.00-16.00"
+                                break
+                            elif choiceTime == 3:
+                                classTime = "16.00-18.00"
+                                break
+                            elif choiceTime == 4:
+                                classTime = "18.00-20.00"
+                                break
+                        else: 
+                            continue
+                    while True: 
+                        classLocation = input("Location: ")
+                        if classLocation in classrooms:
+                            break
+                        else:
+                            continue
+                    generalUtils.clearConsole()
+                    generalUtils.createNewLine()
+                    print(f"Class code: {classCode}\nClass name: {className}\nClass Form: {classForm}\nClass Day: {classDay.capitalize()}\nClass Time: {classTime}\nClass Location: {classLocation}")
+                    while True:
+                        generalUtils.createNewLine()
+                        doneView = input("Is this correct(Y/N)? ").upper()
+                        if doneView == "Y":
+                            if addClassSchedule("ClassSchedule.txt", classCode, classTime, classLocation, classDay) == True:
+                                if addClassInfo("ClassInfo.txt", classCode, formattedClassName, formattedClassForm, classTime, classLocation, classDay) == True:
+                                    print("\nClass added")
+                                    time.sleep(3)
+                            else:
+                                print("\nClass not added")
+                                time.sleep(3)
+                            break
+                        elif doneView == "N":
+                            print("\nClass not added")
                             time.sleep(3)
                             break
                         else:
                             continue
                     break
-            else:
-                continue
+                elif choiceClass == "2":
+                        generalUtils.clearConsole()
+                        generalUtils.createNewLine()
+                        print("Delete classes")
+                        generalUtils.createNewLine()
+                        with open("UserDetails.txt", "r") as file:
+                            for line in file:
+                                values = line.strip().split(";")
+                                if values[1] == userID:
+                        # Print subjectCodeList after the loop
+                                    subjectAssigned = eval(values[11]) 
+                        print(f"Classes assigned: {subjectAssigned}")
+                        generalUtils.createNewLine()
+                        while True: 
+                            classCode = input("Class Code: ").upper()
+                            if classCode in subjectAssigned:
+                                break
+                            else:
+                                continue
+                        generalUtils.clearConsole()
+                        generalUtils.createNewLine()
+                        print(f"Class code: {classCode}")
+                        while True:
+                            generalUtils.createNewLine()
+                            deleteConfirmationChoice = input("Confirm (Press Y/N)?").upper()
+                            if deleteConfirmationChoice == "Y":
+                                if deleteClassSchedule("ClassSchedule.txt", classCode) == True:
+                                    if deleteClassInfo("ClassInfo.txt", classCode) == True:
+                                        print("\nClass deleted")
+                                        time.sleep(3)
+                                        break
+                                else:
+                                    print("Error: Class not deleted")
+                                    time.sleep(3)
+                                    break
+                            elif deleteConfirmationChoice == "N":
+                                print("Class not deleted")
+                                time.sleep(3)
+                                break
+                        break
+                elif choiceClass == "3":
+                    break
+                else:
+                    continue
         elif choice == "2":
             while True:
                 generalUtils.clearConsole()
@@ -415,10 +403,11 @@ def pgTutor(userID):
                     generalUtils.createNewLine()
                     print(f"Class code: {classCode}\nClass name: {className}\nClass Form: {classForm}\nClass Day: {classDay.capitalize()}\nClass Time: {classTime}\nClass Location: {classLocation}")
                     generalUtils.createNewLine()
+                    formattedClassForm = classForm.replace(" ","_")
                     while True:
                         confirmationChoice = input("Confirm(Y/N)? ").upper()
                         if confirmationChoice == "Y":
-                            if updateClassInfo("ClassInfo.txt", classCode, classTime, classLocation, classDay, formattedClassName) and updateClassSchedule("ClassSchedule.txt", classCode, classTime, classLocation, classDay): 
+                            if updateClassInfo("ClassInfo.txt", classCode, formattedClassForm, classTime, classLocation, classDay, formattedClassName) and updateClassSchedule("ClassSchedule.txt", classCode, classTime, classLocation, classDay): 
                                 print("Class updated")
                                 time.sleep(3)
                                 break
@@ -543,3 +532,5 @@ def pgTutor(userID):
         elif choice == "6":
             print("Log out")
             return "LOGOUT"
+
+        
