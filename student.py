@@ -488,7 +488,7 @@ def pgStudent(userID):
             phoneNumber = database.readListValue(userID, 1, 6, "UserDetails.txt")
             gender = database.readListValue(userID, 1, 7, "UserDetails.txt")
             birthday = database.readListValue(userID, 1, 8, "UserDetails.txt")
-            print(f"User ID: {userID}\nIC Number: {fullName}\nEmail: {email}\nPhone Number: {phoneNumber}\nGender: {gender}\nBirthday: {birthday}")
+            print(f"User ID: {userID}\nIC Number: {ICNumber}\nFull Name: {fullName}\nEmail: {email}\nPhone Number: {phoneNumber}\nGender: {gender}\nBirthday: {birthday}")
             generalUtils.createNewLine()
             while True:
                 print("Done Viewing(Enter Y when you are done)? ")
