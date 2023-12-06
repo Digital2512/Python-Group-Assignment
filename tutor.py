@@ -67,6 +67,7 @@ def updateClassSchedule(fileToCheck, classCode, classTime, classLocation, classD
             if values[3] == str(classCode):
                 # Skip the line to delete it
                 updatedClass= True
+                updated_data.append(f"{values[0]};{values[1]};{values[2]};N/A;{values[4]};\n")
                 continue
             updated_data.append(line)
 
@@ -345,7 +346,9 @@ def pgTutor(userID):
                 print("1. Update Class Info\n2. Exit")
                 generalUtils.createNewLine()
                 updateClassInfoChoice = input("Choice: ")
+                generalUtils.clearConsole()
                 if updateClassInfoChoice == "1":
+                    generalUtils.createNewLine()
                     with open("UserDetails.txt", "r") as file:
                         for line in file:
                             values = line.strip().split(";")
@@ -408,14 +411,15 @@ def pgTutor(userID):
                         confirmationChoice = input("Confirm(Y/N)? ").upper()
                         if confirmationChoice == "Y":
                             if updateClassInfo("ClassInfo.txt", classCode, formattedClassForm, classTime, classLocation, classDay, formattedClassName) and updateClassSchedule("ClassSchedule.txt", classCode, classTime, classLocation, classDay): 
-                                print("Class updated")
+                                print("\nClass updated")
                                 time.sleep(3)
                                 break
                             else:
-                                print("Class not updated")
+                                print("\nError: Class not updated")
+                                time.sleep(3)
                                 break
                         elif confirmationChoice == "N":
-                            print("Class not updated")
+                            print("\nClass not updated")
                             time.sleep(3)
                             break
                         else:
@@ -423,6 +427,8 @@ def pgTutor(userID):
                     break
                 elif updateClassInfoChoice == "2":
                     break
+                else:
+                    continue
         elif choice == "3":
             generalUtils.clearConsole()
             generalUtils.createNewLine()

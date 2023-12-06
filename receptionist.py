@@ -321,7 +321,9 @@ def pgReceptionist(userID):
                 print("1. Register Student\n2. Exit")
                 generalUtils.createNewLine()
                 registerStudentChoice = input("Choice: ")
+                generalUtils.clearConsole()
                 if registerStudentChoice == "1":
+                    generalUtils.createNewLine()
                     existingIDList = UniqueIDCreation.readIDFromExistingFile("UserDetails.txt", 1)
                     studentIDNumber = UniqueIDCreation.generateStudentID(existingIDList)
                     print(f"Student ID: {studentIDNumber}")
@@ -441,10 +443,22 @@ def pgReceptionist(userID):
                 generalUtils.createNewLine()
                 print("Delete Student")
                 generalUtils.createNewLine()
+                studentList = []
+                with open("UserDetails.txt","r+") as file:
+                    lines = file.readlines()
+                    for line in lines:
+                        values = line.strip().split(";")
+                        if values[0] == "STUDENT":
+                            formattedName = values[4].replace("_"," ")
+                            studentList.append(formattedName)
+                print(f"Students List: {studentList}")
+                generalUtils.createNewLine()
                 print("1. Delete Student\n2. Exit")
                 generalUtils.createNewLine()
                 deleteStudentChoice = input("Choice: ")
+                generalUtils.clearConsole()
                 if deleteStudentChoice == "1":
+                    generalUtils.createNewLine()
                     searchStudentID = input("Search Student's ID: ")
                     generalUtils.createNewLine()
                     studentName = database.readListValue(searchStudentID, 1, 4, "UserDetails.txt")
@@ -555,6 +569,7 @@ def pgReceptionist(userID):
                         generalUtils.createNewLine()
                         studentRequestChoice = input("Choice: ")
                         if studentRequestChoice == "1":
+                            generalUtils.createNewLine()
                             requestID = input("Request ID: ")
                             if requestID in requestList:
                                 if checkForValue("StudentRequest.txt", requestID, 0) == True: 
@@ -596,6 +611,7 @@ def pgReceptionist(userID):
                                             break
                                         else:
                                             continue
+                                    break
                             else: 
                                 print("Error: No request found")
                                 generalUtils.createNewLine()
@@ -623,6 +639,7 @@ def pgReceptionist(userID):
                         generalUtils.createNewLine()
                         paymentRequestChoice = input("Choice: ")
                         if paymentRequestChoice == "1":
+                            generalUtils.createNewLine()
                             paymentRequestID = input("Payment ID: ")
                             generalUtils.clearConsole()
                             if paymentRequestID in requestList:
@@ -665,9 +682,9 @@ def pgReceptionist(userID):
                                                 break
                                             generalUtils.createNewLine()
                                             time.sleep(3)
-                                            break
                                         else:
                                             continue
+                                    break
                                 else: 
                                     print("Error: No request found")
                                     generalUtils.createNewLine()
@@ -676,6 +693,7 @@ def pgReceptionist(userID):
                             break
                         else:
                             continue
+                    break
                 elif requestChoice == "3":
                     break
                 else:
