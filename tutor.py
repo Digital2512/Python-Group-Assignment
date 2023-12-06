@@ -461,7 +461,7 @@ def pgTutor(userID):
             generalUtils.createNewLine()
             updateProfileChoice = input("Choice: ")
             if updateProfileChoice == "1":
-                password = input("Password: ")
+                password = input("\nPassword: ")
                 ICNumber = int(input("\nIC Number: "))
                 fullName = input("\nFull name: ")
                 formattedName = fullName.replace(" ", "_")

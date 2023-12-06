@@ -465,7 +465,7 @@ def pgStudent(userID):
             generalUtils.createNewLine()
             updateChoice = input("Choice: ")
             if updateChoice == "1":
-                password = input("Password: ")
+                password = input("\nPassword: ")
                 ICNumber = int(input("\nIC Number: "))
                 fullName = input("\nFull name: ")
                 formattedName = fullName.replace(" ","_")

@@ -339,8 +339,8 @@ def pgReceptionist(userID):
                         if formChoice == "1":
                             form = "Form 1"
                             formattedForm = "Form_1"
-                            numberOfSubjects = int(input("Number of Subjects: "))
-                            while len(subjectsChosen) != numberOfSubjects:
+                            numberOfSubjects = input("Number of Subjects: ")
+                            while len(subjectsChosen) != int(numberOfSubjects):
                                 generalUtils.createNewLine()
                                 print("Choose the subjects: \n\nChinese - CHF1\nEnglish - ENF1\nMalay- MAF1\nMathemathics - MTHF1\nAdditional Mathemathics - AMTHF1\nGeneral Commerce - GCF1\nGeneral Science - GSF1")
                                 generalUtils.createNewLine()
@@ -353,8 +353,8 @@ def pgReceptionist(userID):
                         elif formChoice == "2":
                             form = "Form 2"
                             formattedForm = "Form_2"
-                            numberOfSubjects = int(input("Number of Subjects: "))
-                            while len(subjectsChosen) != numberOfSubjects:
+                            numberOfSubjects = input("Number of Subjects: ")
+                            while len(subjectsChosen) != int(numberOfSubjects):
                                 generalUtils.createNewLine()
                                 print("Choose the subjects: \n\nChinese - CHF2\nEnglish - ENF2\nMalay- MAF2\nMathemathics - MTHF2\nAdditional Mathemathics - AMTHF2\nGeneral Commerce - GCF2\nGeneral Science - GSF2")
                                 generalUtils.createNewLine()
@@ -409,8 +409,7 @@ def pgReceptionist(userID):
                                     continue
                         else: 
                             continue
-
-                        # {capitalizedRole};{IDNumber};{password};{ICNumber};{fullName};{email};{phoneNumber};{gender};{birthday};{form};{numberOfSubjects};{subject}
+                        generalUtils.clearConsole()
                         generalUtils.createNewLine()
                         print(f"Profile\n\nStudent ID: {studentIDNumber}\nPassword: {password}\nName: {name}\nForm: {form}\nSubjects Enrolled: {subjectsChosen}")
                         generalUtils.createNewLine()
@@ -482,7 +481,7 @@ def pgReceptionist(userID):
                 generalUtils.createNewLine()
                 updateProfileChoice = input("Choice: ")
                 if updateProfileChoice == "1":
-                    password = input("Password: ")
+                    password = input("\nPassword: ")
                     ICNumber = int(input("\nIC Number: "))
                     fullName = input("\nFull name: ")
                     formattedFullName = fullName.replace(" ","_")
@@ -551,50 +550,60 @@ def pgReceptionist(userID):
                             requestList.append(values[0])
                     print(f"Request List: {requestList}")
                     generalUtils.createNewLine()
-                    requestID = input("Request ID: ")
-                    if checkForValue("StudentRequest.txt", requestID, 0) == True: 
-                        generalUtils.createNewLine()   
-                        studentID = database.readListValue(requestID, 0, 1, "StudentRequest.txt")
-                        print(f"Student ID: {studentID}\n")
-                        name = database.readListValue(studentID, 1, 2, "StudentRequest.txt")
-                        spacedName = name.replace("_", " ")
-                        print(f"Full Name: {spacedName}")
-                        currentSubject = database.readListValue(requestID, 0, 3, "StudentRequest.txt")
-                        requestedSubject = database.readListValue(requestID, 0, 4, "StudentRequest.txt")
+                    while True:
+                        print("1. Continue\n2. Exit")
                         generalUtils.createNewLine()
-                        formattedCurrentSubject = currentSubject.upper().replace("_"," ")
-                        formattedRequestedSubject = requestedSubject.upper().replace("_"," ")
-                        print(f"Current Subject: {currentSubject}\n")
-                        print(f"Requested Subject: {requestedSubject}")
-                        generalUtils.createNewLine()
-                        while True:
-                            approval = input("Approved(Y/N)? ").upper()
-                            if approval == "Y":
-                                if changedSubjects("UserDetails.txt", studentID, formattedCurrentSubject, formattedRequestedSubject) and approveSubjectChange("StudentRequest.txt", requestID, studentID, name, currentSubject, requestedSubject) == True:
-                                    studentName = database.readListValue(studentID, 1, 4, "UserDetails.txt")
-                                    deleteStudentList("SubjectsInfo.txt", currentSubject, name)
-                                    updateStudentList("SubjectsInfo.txt", requestedSubject, name)
-                                    print("\nRequest Approved(Subject Changed)")
-                                    time.sleep(3)
-                                    break
-                                else: 
-                                    print("\nError: Subject did not change")
-                                    time.sleep(3)
-                                    break
-                            elif approval == "N":
-                                if rejectSubjectChange("StudentRequest.txt", requestID, studentID, name, currentSubject, requestedSubject) == True:
-                                    print("\nRequest Rejected")
-                                    time.sleep(3)
-                                    break
+                        studentRequestChoice = input("Choice: ")
+                        if studentRequestChoice == "1":
+                            requestID = input("Request ID: ")
+                            if requestID in requestList:
+                                if checkForValue("StudentRequest.txt", requestID, 0) == True: 
+                                    generalUtils.createNewLine()   
+                                    studentID = database.readListValue(requestID, 0, 1, "StudentRequest.txt")
+                                    print(f"Student ID: {studentID}\n")
+                                    name = database.readListValue(studentID, 1, 2, "StudentRequest.txt")
+                                    spacedName = name.replace("_", " ")
+                                    print(f"Full Name: {spacedName}")
+                                    currentSubject = database.readListValue(requestID, 0, 3, "StudentRequest.txt")
+                                    requestedSubject = database.readListValue(requestID, 0, 4, "StudentRequest.txt")
+                                    generalUtils.createNewLine()
+                                    formattedCurrentSubject = currentSubject.upper().replace("_"," ")
+                                    formattedRequestedSubject = requestedSubject.upper().replace("_"," ")
+                                    print(f"Current Subject: {currentSubject}\n")
+                                    print(f"Requested Subject: {requestedSubject}")
+                                    generalUtils.createNewLine()
+                                    while True:
+                                        approval = input("Approved(Y/N)? ").upper()
+                                        if approval == "Y":
+                                            if changedSubjects("UserDetails.txt", studentID, formattedCurrentSubject, formattedRequestedSubject) and approveSubjectChange("StudentRequest.txt", requestID, studentID, name, currentSubject, requestedSubject) == True:
+                                                studentName = database.readListValue(studentID, 1, 4, "UserDetails.txt")
+                                                deleteStudentList("SubjectsInfo.txt", currentSubject, name)
+                                                updateStudentList("SubjectsInfo.txt", requestedSubject, name)
+                                                print("\nRequest Approved(Subject Changed)")
+                                                time.sleep(3)
+                                                break
+                                            else: 
+                                                print("\nError: Subject did not change")
+                                                time.sleep(3)
+                                                break
+                                        elif approval == "N":
+                                            if rejectSubjectChange("StudentRequest.txt", requestID, studentID, name, currentSubject, requestedSubject) == True:
+                                                print("\nRequest Rejected")
+                                                time.sleep(3)
+                                                break
+                                            generalUtils.createNewLine()
+                                            time.sleep(3)
+                                            break
+                                        else:
+                                            continue
+                            else: 
+                                print("Error: No request found")
                                 generalUtils.createNewLine()
                                 time.sleep(3)
-                                break
-                            else:
-                                continue
-                    else: 
-                        print("Error: No request found")
-                        generalUtils.createNewLine()
-                        time.sleep(3)
+                        elif studentRequestChoice == "2":
+                            break
+                        else:
+                            continue
                 elif requestChoice == "2":
                     generalUtils.clearConsole()
                     generalUtils.createNewLine()
@@ -609,54 +618,64 @@ def pgReceptionist(userID):
                             requestList.append(values[0])
                     print(f"Request List: {requestList}")
                     generalUtils.createNewLine()
-                    paymentRequestID = input("Payment ID: ")
-                    generalUtils.clearConsole()
-                    if checkForValue("PaymentRequest.txt", paymentRequestID, 0) == True: 
-                        generalUtils.createNewLine()   
-                        studentID = database.readListValue(paymentRequestID, 0, 1, "PaymentRequest.txt")
-                        print(f"Student ID: {studentID}\n")
-                        name = database.readListValue(studentID, 1, 2, "StudentRequest.txt")
-                        spacedName = name.replace("_", " ")
-                        print(f"Full Name: {spacedName}")
-                        subjectCode = database.readListValue(paymentRequestID, 0, 3, "PaymentRequest.txt")
-                        amount = database.readListValue(paymentRequestID, 0, 4, "PaymentRequest.txt")
+                    while True:
+                        print("1. Continue\n2. Exit")
                         generalUtils.createNewLine()
-                        print(f"Subject Code: {subjectCode}\n")
-                        print(f"Paid Amount: {amount}")
-                        generalUtils.createNewLine()
-                        while True:
-                            approval = input("Approved(Y/N)? ").upper()
-                            if approval == "Y":
-                                existingIDList = UniqueIDCreation.readIDFromExistingFile("ReceiptCollection.txt", 0)
-                                approvedReceiptID = UniqueIDCreation.generateReceiptID(existingIDList)
-                                if updateSubjectIncome("SubjectsInfo.txt", subjectCode, amount) and approvePayment("PaymentRequest.txt", paymentRequestID, studentID, name, subjectCode, amount, approvedReceiptID) == True:
-                                    receiptString = f"{approvedReceiptID};{studentID};{name};{subjectCode};{amount};APPROVED;\n"
-                                    database.writeToFile("ReceiptCollection.txt", receiptString)
-                                    print("\nPayment Request Approved ")
-                                    time.sleep(3)
-                                    break
+                        paymentRequestChoice = input("Choice: ")
+                        if paymentRequestChoice == "1":
+                            paymentRequestID = input("Payment ID: ")
+                            generalUtils.clearConsole()
+                            if paymentRequestID in requestList:
+                                if checkForValue("PaymentRequest.txt", paymentRequestID, 0) == True: 
+                                    generalUtils.createNewLine()   
+                                    studentID = database.readListValue(paymentRequestID, 0, 1, "PaymentRequest.txt")
+                                    print(f"Student ID: {studentID}\n")
+                                    name = database.readListValue(studentID, 1, 2, "StudentRequest.txt")
+                                    spacedName = name.replace("_", " ")
+                                    print(f"Full Name: {spacedName}")
+                                    subjectCode = database.readListValue(paymentRequestID, 0, 3, "PaymentRequest.txt")
+                                    amount = database.readListValue(paymentRequestID, 0, 4, "PaymentRequest.txt")
+                                    generalUtils.createNewLine()
+                                    print(f"Subject Code: {subjectCode}\n")
+                                    print(f"Paid Amount: {amount}")
+                                    generalUtils.createNewLine()
+                                    while True:
+                                        approval = input("Approved(Y/N)? ").upper()
+                                        if approval == "Y":
+                                            existingIDList = UniqueIDCreation.readIDFromExistingFile("ReceiptCollection.txt", 0)
+                                            approvedReceiptID = UniqueIDCreation.generateReceiptID(existingIDList)
+                                            if updateSubjectIncome("SubjectsInfo.txt", subjectCode, amount) and approvePayment("PaymentRequest.txt", paymentRequestID, studentID, name, subjectCode, amount, approvedReceiptID) == True:
+                                                receiptString = f"{approvedReceiptID};{studentID};{name};{subjectCode};{amount};APPROVED;\n"
+                                                database.writeToFile("ReceiptCollection.txt", receiptString)
+                                                print("\nPayment Request Approved ")
+                                                time.sleep(3)
+                                                break
+                                            else: 
+                                                print("\nError: Payment Not Approved")
+                                                time.sleep(3)
+                                                break
+                                        elif approval == "N":
+                                            existingIDList = UniqueIDCreation.readIDFromExistingFile("ReceiptCollection.txt", 0)
+                                            deletedReceiptID = UniqueIDCreation.generateReceiptID(existingIDList)
+                                            if rejectPayment("PaymentRequest.txt", paymentRequestID, studentID, name, subjectCode, amount) == True:
+                                                receiptString = f"{deletedReceiptID};{studentID};{name};{subjectCode};{amount};REJECTED;\n"
+                                                database.writeToFile("ReceiptCollection.txt", receiptString)
+                                                print("\nPayment Request Rejected")
+                                                time.sleep(3)
+                                                break
+                                            generalUtils.createNewLine()
+                                            time.sleep(3)
+                                            break
+                                        else:
+                                            continue
                                 else: 
-                                    print("\nError: Payment Not Approved")
+                                    print("Error: No request found")
+                                    generalUtils.createNewLine()
                                     time.sleep(3)
-                                    break
-                            elif approval == "N":
-                                existingIDList = UniqueIDCreation.readIDFromExistingFile("ReceiptCollection.txt", 0)
-                                deletedReceiptID = UniqueIDCreation.generateReceiptID(existingIDList)
-                                if rejectPayment("PaymentRequest.txt", paymentRequestID, studentID, name, subjectCode, amount) == True:
-                                    receiptString = f"{deletedReceiptID};{studentID};{name};{subjectCode};{amount};REJECTED;\n"
-                                    database.writeToFile("ReceiptCollection.txt", receiptString)
-                                    print("\nPayment Request Rejected")
-                                    time.sleep(3)
-                                    break
-                                generalUtils.createNewLine()
-                                time.sleep(3)
-                                break
-                            else:
-                                continue
-                    else: 
-                        print("Error: No request found")
-                        generalUtils.createNewLine()
-                        time.sleep(3)
+                        elif paymentRequestChoice == "2":
+                            break
+                        else:
+                            continue
                 elif requestChoice == "3":
                     break
                 else:
