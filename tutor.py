@@ -67,13 +67,17 @@ def updateClassSchedule(fileToCheck, classCode, classTime, classLocation, classD
             if values[3] == str(classCode):
                 # Skip the line to delete it
                 updatedClass= True
-                updated_data.append(f"{values[0]};{values[1]};{values[2]};N/A;{values[4]};\n")
+                previousLocation = values[0]
+                previousDay = values[1]
+                previousTime = values[2]
                 continue
             updated_data.append(line)
 
     # Add the updated line at the end
     if updatedClass: 
+        updated_data.append(f"{previousLocation};{previousDay};{previousTime};N/A;AVAILABLE;\n")
         updated_data.append(f"{classLocation};{classDay};{classTime};{classCode};UNAVAILABLE;\n")
+        updated_data.remove(f"{classLocation};{classDay};{classTime};N/A;AVAILABLE;\n")
 
     # Write the updated data back to the file
         with open(fileToCheck, "+w") as file:
