@@ -308,7 +308,7 @@ def pgReceptionist(userID):
                     splittedName = values[4].replace("_"," ")
                     print(f"Welcome, {splittedName} ({values[0]})")
         generalUtils.createNewLine()
-        print("1. Register Student\n2. Delete Students\n3. Update Profile\n4. Student Request\n5. View Profile\n6. Log Out")
+        print("1. Register Student\n2. Delete Students\n3. Student Request\n4. Update Profile\n5. View Profile\n6. Log Out")
         generalUtils.createNewLine()
         choice1 = input("Choice: ")
         if choice1 == "1":
@@ -344,7 +344,13 @@ def pgReceptionist(userID):
                             form = "Form 1"
                             formattedForm = "Form_1"
                             while True:
-                                numberOfSubjects = int(input("Number of Subjects: "))
+                                while True:
+                                    try:
+                                        numberOfSubjects = int(input("Number of Subjects: "))
+                                        break
+                                    except ValueError:
+                                        print("\nError: Please input a NUMBER")
+                                        continue
                                 if numberOfSubjects < 4:
                                     while len(subjectsChosen) != int(numberOfSubjects):
                                         generalUtils.createNewLine()
@@ -367,7 +373,13 @@ def pgReceptionist(userID):
                             form = "Form 2"
                             formattedForm = "Form_2"
                             while True:
-                                numberOfSubjects = input("Number of Subjects: ")
+                                while True:
+                                    try:
+                                        numberOfSubjects = int(input("Number of Subjects: "))
+                                        break
+                                    except ValueError:
+                                        print("\nError: Please input a NUMBER")
+                                        continue
                                 if numberOfSubjects < 4:
                                     while len(subjectsChosen) != int(numberOfSubjects):
                                         generalUtils.createNewLine()
@@ -389,7 +401,13 @@ def pgReceptionist(userID):
                             form = "Form 3"
                             formattedForm = "Form_3"
                             while True:
-                                numberOfSubjects = int(input("Number of Subjects: "))
+                                while True:
+                                    try:
+                                        numberOfSubjects = int(input("Number of Subjects: "))
+                                        break
+                                    except ValueError:
+                                        print("\nError: Please input a NUMBER")
+                                        continue
                                 if numberOfSubjects < 4:
                                     while len(subjectsChosen) != numberOfSubjects:
                                         generalUtils.createNewLine()
@@ -411,7 +429,13 @@ def pgReceptionist(userID):
                             form = "Form 4"
                             formattedForm = "Form_4"
                             while True:
-                                numberOfSubjects = int(input("Number of Subjects: "))
+                                while True:
+                                    try:
+                                        numberOfSubjects = int(input("Number of Subjects: "))
+                                        break
+                                    except ValueError:
+                                        print("\nError: Please input a NUMBER")
+                                        continue
                                 if numberOfSubjects < 4:
                                     while len(subjectsChosen) != numberOfSubjects:
                                         generalUtils.createNewLine()
@@ -433,7 +457,13 @@ def pgReceptionist(userID):
                             form = "Form 5"
                             formattedForm = "Form_5"
                             while True:
-                                numberOfSubjects = int(input("Number of Subjects: "))
+                                while True:
+                                    try:
+                                        numberOfSubjects = int(input("Number of Subjects: "))
+                                        break
+                                    except ValueError:
+                                        print("\nError: Please input a NUMBER")
+                                        continue
                                 if numberOfSubjects < 4:
                                     while len(subjectsChosen) != numberOfSubjects:
                                         generalUtils.createNewLine()
@@ -529,62 +559,6 @@ def pgReceptionist(userID):
                 else: 
                     continue
         elif choice1 == "3":
-            while True:
-                generalUtils.clearConsole()
-                generalUtils.createNewLine()
-                print("Update Profile")
-                generalUtils.createNewLine()
-                print("1. Update Profile\n2. Exit")
-                generalUtils.createNewLine()
-                updateProfileChoice = input("Choice: ")
-                if updateProfileChoice == "1":
-                    password = input("\nPassword: ")
-                    ICNumber = int(input("\nIC Number: "))
-                    fullName = input("\nFull name: ")
-                    formattedFullName = fullName.replace(" ","_")
-                    email = input("\nEmail: ")
-                    phoneNumber = int(input("\nPhone Number: "))
-                    generalUtils.createNewLine()
-                    while True: 
-                        print("Gender:")
-                        generalUtils.createNewLine()
-                        print("1. Male\n2. Female\n3. N/A")
-                        generalUtils.createNewLine()
-                        gender = input("Choice: ").upper()
-                        generalUtils.createNewLine()
-                        if gender == "MALE" or gender == "FEMALE" or gender == "N/A":
-                            break
-                        else: 
-                            continue
-                    while True: 
-                        birthday = input("Birthday(DD/MM/YYYY): ").replace("/","-")
-                        generalUtils.createNewLine()
-                        if len(str(birthday)) == 10:
-                            break
-                        else:
-                            continue
-                    print(f"ID Number: {userID}\nPassword: {password}\nIC Number: {ICNumber}\nFull Name: {fullName}\nEmail: {email}\nPhone Number: {phoneNumber}\nGender: {gender}\nBirthday: {birthday}")
-                    generalUtils.createNewLine()
-                    while True:
-                        confirmationChoice = input("Is this correct(Y/N)? ").upper()
-                        if confirmationChoice == "Y":
-                            if updateReceptionistProfile("UserDetails.txt", userID, "RECEPTIONIST",password,ICNumber,formattedFullName,email,phoneNumber,birthday,gender) == True:
-                                print("\nProfile Updated")
-                                time.sleep(3)
-                                break
-                        elif confirmationChoice == "N":
-                            print("\nProfile not updated")
-                            time.sleep(3)
-                            break
-                        else:
-                            print("Invalid Input!\n")
-                            time.sleep(2)
-                    break
-                elif updateProfileChoice == "2":
-                    break
-                else:
-                    continue
-        elif choice1 == "4":
             while True:
                 generalUtils.clearConsole()
                 generalUtils.createNewLine()
@@ -736,8 +710,63 @@ def pgReceptionist(userID):
                             break
                         else:
                             continue
-                    break
                 elif requestChoice == "3":
+                    break
+                else:
+                    continue
+        elif choice1 == "4":
+            while True:
+                generalUtils.clearConsole()
+                generalUtils.createNewLine()
+                print("Update Profile")
+                generalUtils.createNewLine()
+                print("1. Update Profile\n2. Exit")
+                generalUtils.createNewLine()
+                updateProfileChoice = input("Choice: ")
+                if updateProfileChoice == "1":
+                    password = input("\nPassword: ")
+                    ICNumber = int(input("\nIC Number: "))
+                    fullName = input("\nFull name: ")
+                    formattedFullName = fullName.replace(" ","_")
+                    email = input("\nEmail: ")
+                    phoneNumber = int(input("\nPhone Number: "))
+                    generalUtils.createNewLine()
+                    while True: 
+                        print("Gender:")
+                        generalUtils.createNewLine()
+                        print("1. Male\n2. Female\n3. N/A")
+                        generalUtils.createNewLine()
+                        gender = input("Choice: ").upper()
+                        generalUtils.createNewLine()
+                        if gender == "MALE" or gender == "FEMALE" or gender == "N/A":
+                            break
+                        else: 
+                            continue
+                    while True: 
+                        birthday = input("Birthday(DD/MM/YYYY): ").replace("/","-")
+                        generalUtils.createNewLine()
+                        if len(str(birthday)) == 10:
+                            break
+                        else:
+                            continue
+                    print(f"ID Number: {userID}\nPassword: {password}\nIC Number: {ICNumber}\nFull Name: {fullName}\nEmail: {email}\nPhone Number: {phoneNumber}\nGender: {gender}\nBirthday: {birthday}")
+                    generalUtils.createNewLine()
+                    while True:
+                        confirmationChoice = input("Is this correct(Y/N)? ").upper()
+                        if confirmationChoice == "Y":
+                            if updateReceptionistProfile("UserDetails.txt", userID, "RECEPTIONIST",password,ICNumber,formattedFullName,email,phoneNumber,birthday,gender) == True:
+                                print("\nProfile Updated")
+                                time.sleep(3)
+                                break
+                        elif confirmationChoice == "N":
+                            print("\nProfile not updated")
+                            time.sleep(3)
+                            break
+                        else:
+                            print("Invalid Input!\n")
+                            time.sleep(2)
+                    break
+                elif updateProfileChoice == "2":
                     break
                 else:
                     continue
