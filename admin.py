@@ -116,10 +116,14 @@ def pgAdmin(userID):
                         generalUtils.createNewLine()
                         subject = input("Subject Code: ").upper()
                         if subject in subjectCode:
-                            listOfSubject.append(subject)
+                            if not subject in listOfSubject:
+                                listOfSubject.append(subject)
+                            else:
+                                print("Error: Subject has already been chosen")
+                                time.sleep(2)
                             break
                         else:
-                            print("\nSubject code not found")
+                            print("\nError: Subject code not found")
                             time.sleep(2)
                             continue
                 generalUtils.clearConsole()

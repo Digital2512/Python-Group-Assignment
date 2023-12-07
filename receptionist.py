@@ -324,6 +324,8 @@ def pgReceptionist(userID):
                 generalUtils.clearConsole()
                 if registerStudentChoice == "1":
                     generalUtils.createNewLine()
+                    print("Register Student")
+                    generalUtils.createNewLine()
                     existingIDList = UniqueIDCreation.readIDFromExistingFile("UserDetails.txt", 1)
                     studentIDNumber = UniqueIDCreation.generateStudentID(existingIDList)
                     print(f"Student ID: {studentIDNumber}")
@@ -350,7 +352,10 @@ def pgReceptionist(userID):
                                         generalUtils.createNewLine()
                                         subject = input("Choice: ").upper().replace(" ", "_")
                                         if subject in subjectsF1:
-                                            subjectsChosen.append(subject)
+                                            if not subject in subjectsChosen:
+                                                subjectsChosen.append(subject)
+                                            else:
+                                                print("Error: Subject has already been chosen")
                                         else: 
                                             print("Error: Invalid Input(Please choose from the availale subject list)")
                                             continue
@@ -370,7 +375,10 @@ def pgReceptionist(userID):
                                         generalUtils.createNewLine()
                                         subject = input("Choice: ").upper().replace(" ", "_")
                                         if subject in subjectsF2:
-                                            subjectsChosen.append(subject)
+                                            if not subject in subjectsChosen:
+                                                subjectsChosen.append(subject)
+                                            else:
+                                                print("Error: Subject has already been chosen")
                                         else: 
                                             print("Error: Invalid Input(Please choose from the availale subject list)")
                                             continue
@@ -389,7 +397,10 @@ def pgReceptionist(userID):
                                         generalUtils.createNewLine()
                                         subject = input("Choice: ").upper().replace(" ", "_")
                                         if subject in subjectsF3:
-                                            subjectsChosen.append(subject)
+                                            if not subject in subjectsChosen:
+                                                subjectsChosen.append(subject)
+                                            else:
+                                                print("Error: Subject has already been chosen")
                                         else: 
                                             print("Error: Invalid Input(Please choose from the availale subject list)")
                                             continue
@@ -408,7 +419,10 @@ def pgReceptionist(userID):
                                         generalUtils.createNewLine()
                                         subject = input("Choice: ").upper().replace(" ", "_")
                                         if subject in subjectsF4:
-                                            subjectsChosen.append(subject)
+                                            if not subject in subjectsChosen:
+                                                subjectsChosen.append(subject)
+                                            else:
+                                                print("Error: Subject has already been chosen")
                                         else: 
                                             print("Error: Invalid Input(Please choose from the availale subject list)")
                                             continue
@@ -427,7 +441,10 @@ def pgReceptionist(userID):
                                         generalUtils.createNewLine()
                                         subject = input("Choice: ").upper().replace(" ", "_")
                                         if subject in subjectsF5:
-                                            subjectsChosen.append(subject)
+                                            if not subject in subjectsChosen:
+                                                subjectsChosen.append(subject)
+                                            else:
+                                                print("Error: Subject has already been chosen")
                                         else: 
                                             print("Error: Invalid Input(Please choose from the availale subject list)")
                                             time.sleep(2)
