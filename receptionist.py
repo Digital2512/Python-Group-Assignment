@@ -341,73 +341,99 @@ def pgReceptionist(userID):
                         if formChoice == "1":
                             form = "Form 1"
                             formattedForm = "Form_1"
-                            numberOfSubjects = input("Number of Subjects: ")
-                            while len(subjectsChosen) != int(numberOfSubjects):
-                                generalUtils.createNewLine()
-                                print("Choose the subjects: \n\nChinese - CHF1\nEnglish - ENF1\nMalay- MAF1\nMathemathics - MTHF1\nAdditional Mathemathics - AMTHF1\nGeneral Commerce - GCF1\nGeneral Science - GSF1")
-                                generalUtils.createNewLine()
-                                subject = input("Choice: ").upper().replace(" ", "_")
-                                if subject in subjectsF1:
-                                    subjectsChosen.append(subject)
-                                else: 
-                                    print("Error: Invalid Input(Please choose from the availale subject list)")
+                            while True:
+                                numberOfSubjects = int(input("Number of Subjects: "))
+                                if numberOfSubjects < 4:
+                                    while len(subjectsChosen) != int(numberOfSubjects):
+                                        generalUtils.createNewLine()
+                                        print("Choose the subjects: \n\nChinese - CHF1\nEnglish - ENF1\nMalay- MAF1\nMathemathics - MTHF1\nAdditional Mathemathics - AMTHF1\nGeneral Commerce - GCF1\nGeneral Science - GSF1")
+                                        generalUtils.createNewLine()
+                                        subject = input("Choice: ").upper().replace(" ", "_")
+                                        if subject in subjectsF1:
+                                            subjectsChosen.append(subject)
+                                        else: 
+                                            print("Error: Invalid Input(Please choose from the availale subject list)")
+                                            continue
+                                    break
+                                else:
+                                    print("Number of subjects for a student can only be up to 3 subjects")
                                     continue
                         elif formChoice == "2":
                             form = "Form 2"
                             formattedForm = "Form_2"
-                            numberOfSubjects = input("Number of Subjects: ")
-                            while len(subjectsChosen) != int(numberOfSubjects):
-                                generalUtils.createNewLine()
-                                print("Choose the subjects: \n\nChinese - CHF2\nEnglish - ENF2\nMalay- MAF2\nMathemathics - MTHF2\nAdditional Mathemathics - AMTHF2\nGeneral Commerce - GCF2\nGeneral Science - GSF2")
-                                generalUtils.createNewLine()
-                                subject = input("Choice: ").upper().replace(" ", "_")
-                                if subject in subjectsF2:
-                                    subjectsChosen.append(subject)
-                                else: 
-                                    print("Error: Invalid Input(Please choose from the availale subject list)")
+                            while True:
+                                numberOfSubjects = input("Number of Subjects: ")
+                                if numberOfSubjects < 4:
+                                    while len(subjectsChosen) != int(numberOfSubjects):
+                                        generalUtils.createNewLine()
+                                        print("Choose the subjects: \n\nChinese - CHF2\nEnglish - ENF2\nMalay- MAF2\nMathemathics - MTHF2\nAdditional Mathemathics - AMTHF2\nGeneral Commerce - GCF2\nGeneral Science - GSF2")
+                                        generalUtils.createNewLine()
+                                        subject = input("Choice: ").upper().replace(" ", "_")
+                                        if subject in subjectsF2:
+                                            subjectsChosen.append(subject)
+                                        else: 
+                                            print("Error: Invalid Input(Please choose from the availale subject list)")
+                                            continue
+                                    break
+                                else:
                                     continue
                         elif formChoice == "3":
                             form = "Form 3"
                             formattedForm = "Form_3"
-                            numberOfSubjects = int(input("Number of Subjects: "))
-                            while len(subjectsChosen) != numberOfSubjects:
-                                generalUtils.createNewLine()
-                                print("Choose the subjects: \n\nChinese - CHF3\nEnglish - ENF3\nMalay- MAF3\nMathemathics - MTHF3\nAdditional Mathemathics - AMTHF3\nGeneral Commerce - GCF3\nGeneral Science - GSF3")
-                                generalUtils.createNewLine()
-                                subject = input("Choice: ").upper().replace(" ", "_")
-                                if subject in subjectsF3:
-                                    subjectsChosen.append(subject)
-                                else: 
-                                    print("Error: Invalid Input(Please choose from the availale subject list)")
+                            while True:
+                                numberOfSubjects = int(input("Number of Subjects: "))
+                                if numberOfSubjects < 4:
+                                    while len(subjectsChosen) != numberOfSubjects:
+                                        generalUtils.createNewLine()
+                                        print("Choose the subjects: \n\nChinese - CHF3\nEnglish - ENF3\nMalay- MAF3\nMathemathics - MTHF3\nAdditional Mathemathics - AMTHF3\nGeneral Commerce - GCF3\nGeneral Science - GSF3")
+                                        generalUtils.createNewLine()
+                                        subject = input("Choice: ").upper().replace(" ", "_")
+                                        if subject in subjectsF3:
+                                            subjectsChosen.append(subject)
+                                        else: 
+                                            print("Error: Invalid Input(Please choose from the availale subject list)")
+                                            continue
+                                    break
+                                else:
                                     continue
                         elif formChoice == "4":
                             form = "Form 4"
                             formattedForm = "Form_4"
-                            numberOfSubjects = int(input("Number of Subjects: "))
-                            while len(subjectsChosen) != numberOfSubjects:
-                                generalUtils.createNewLine()
-                                print("Choose the subjects: \n\nChinese - CHF4\nEnglish - ENF4\nMalay - MAF4\nMathemathics - MTHF4\nAdditional Mathemathics - AMTHF4\nAccounting - ACF4\nEconomics - ECF4\nBusiness Studies - BSF4\nPhysics - PHF4\nChemistry - CHMF4\nBiology - BIOF4")
-                                generalUtils.createNewLine()
-                                subject = input("Choice: ").upper().replace(" ", "_")
-                                if subject in subjectsF4:
-                                    subjectsChosen.append(subject)
-                                else: 
-                                    print("Error: Invalid Input(Please choose from the availale subject list)")
+                            while True:
+                                numberOfSubjects = int(input("Number of Subjects: "))
+                                if numberOfSubjects < 4:
+                                    while len(subjectsChosen) != numberOfSubjects:
+                                        generalUtils.createNewLine()
+                                        print("Choose the subjects: \n\nChinese - CHF4\nEnglish - ENF4\nMalay - MAF4\nMathemathics - MTHF4\nAdditional Mathemathics - AMTHF4\nAccounting - ACF4\nEconomics - ECF4\nBusiness Studies - BSF4\nPhysics - PHF4\nChemistry - CHMF4\nBiology - BIOF4")
+                                        generalUtils.createNewLine()
+                                        subject = input("Choice: ").upper().replace(" ", "_")
+                                        if subject in subjectsF4:
+                                            subjectsChosen.append(subject)
+                                        else: 
+                                            print("Error: Invalid Input(Please choose from the availale subject list)")
+                                            continue
+                                    break
+                                else:
                                     continue
                         elif formChoice == "5":
                             form = "Form 5"
                             formattedForm = "Form_5"
-                            numberOfSubjects = int(input("Number of Subjects: "))
-                            while len(subjectsChosen) != numberOfSubjects:
-                                generalUtils.createNewLine()
-                                print("Choose the subjects: \n\nChinese - CHF5\nEnglish - ENF5\nMalay - MAF5\nMathemathics - MTHF5\nAdditional Mathemathics - AMTHF5\nAccounting - ACF5\nEconomics - ECF5\nBusiness Studies - BSF5\nPhysics - PHF5\nChemistry - CHMF5\nBiology - BIOF5")
-                                generalUtils.createNewLine()
-                                subject = input("Choice: ").upper().replace(" ", "_")
-                                if subject in subjectsF5:
-                                    subjectsChosen.append(subject)
-                                else: 
-                                    print("Error: Invalid Input(Please choose from the availale subject list)")
-                                    time.sleep(2)
+                            while True:
+                                numberOfSubjects = int(input("Number of Subjects: "))
+                                if numberOfSubjects < 4:
+                                    while len(subjectsChosen) != numberOfSubjects:
+                                        generalUtils.createNewLine()
+                                        print("Choose the subjects: \n\nChinese - CHF5\nEnglish - ENF5\nMalay - MAF5\nMathemathics - MTHF5\nAdditional Mathemathics - AMTHF5\nAccounting - ACF5\nEconomics - ECF5\nBusiness Studies - BSF5\nPhysics - PHF5\nChemistry - CHMF5\nBiology - BIOF5")
+                                        generalUtils.createNewLine()
+                                        subject = input("Choice: ").upper().replace(" ", "_")
+                                        if subject in subjectsF5:
+                                            subjectsChosen.append(subject)
+                                        else: 
+                                            print("Error: Invalid Input(Please choose from the availale subject list)")
+                                            time.sleep(2)
+                                            continue
+                                    break
+                                else:
                                     continue
                         else: 
                             continue
