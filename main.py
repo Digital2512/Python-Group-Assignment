@@ -23,7 +23,6 @@ def pgMain():
             generalUtils.createNewLine()
             print("Login")
             generalUtils.createNewLine()
-            list = database.readFile("UserDetails.txt")
 
             #Give 3 tries for username and also password respectively
             for i in range(0 , 3, 1):
