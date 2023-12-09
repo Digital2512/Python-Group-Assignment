@@ -522,8 +522,7 @@ def pgReceptionist(userID):
                     for line in lines:
                         values = line.strip().split(";")
                         if values[0] == "STUDENT":
-                            formattedName = values[4].replace("_"," ")
-                            studentList.append(formattedName)
+                            studentList.append(values[1])
                 print(f"Students List: {studentList}")
                 generalUtils.createNewLine()
                 print("1. Delete Student\n2. Exit")
