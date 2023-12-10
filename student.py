@@ -300,9 +300,15 @@ def pgStudent(userID):
                             print("\nInvalid subject code")
                             continue
                     subjectFee = database.readListValue(subjectCode, 0, 2, "SubjectsInfo.txt").replace("_"," ")
+                    formattedFee = int(subjectFee)
                     print(f"Amount that should be paid: {subjectFee}")
-                    # might want to optimize this part
-                    amount = int(input("Amount paid: "))
+                    while True:
+                        amount = int(input("Amount paid: "))
+                        if amount == formattedFee:
+                            break
+                        else:
+                            print("Amount must be equal to subject fee")
+                            continue
                     generalUtils.createNewLine()
                     print(f"Payment ID: {paymentID}\nAmount of payment: {amount}")
                     generalUtils.createNewLine()
