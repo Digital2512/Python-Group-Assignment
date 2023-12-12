@@ -467,62 +467,63 @@ def pgStudent(userID):
                 else: 
                     continue
         elif choice == "4":
-            generalUtils.clearConsole()
-            generalUtils.createNewLine()
-            print("Update Profile")
-            generalUtils.createNewLine()
-            print("1. Update Profile\n2. Exit")
-            generalUtils.createNewLine()
-            updateChoice = input("Choice: ")
-            if updateChoice == "1":
-                password = input("\nPassword: ")
-                ICNumber = int(input("\nIC Number: "))
-                fullName = input("\nFull name: ")
-                formattedName = fullName.replace(" ","_")
-                email = input("\nEmail: ")
-                phoneNumber = int(input("\nPhone Number: "))
+            while True:
+                generalUtils.clearConsole()
                 generalUtils.createNewLine()
-                while True: 
-                    print("Gender")
-                    generalUtils.createNewLine()
-                    print("1. Male\n2. Female\n3. N/A")
-                    generalUtils.createNewLine()
-                    gender = input("Choice: ").upper()
-                    generalUtils.createNewLine()
-                    if gender == "MALE" or gender == "FEMALE" or gender == "N/A":
-                        break
-                    else: 
-                        continue
-                while True: 
-                    birthday = input("Birthday(DD/MM/YYYY): ").replace("/","-")
-                    generalUtils.createNewLine()
-                    if len(str(birthday)) == 10:
-                        break
-                    else:
-                        continue
-                print(f"Profile\n\nID Number: {userID}\nPassword: {password}\nIC Number: {ICNumber}\nFull Name: {fullName}\nEmail: {email}\nPhone Number: {phoneNumber}\nGender: {gender}\nBirthday: {birthday}")
+                print("Update Profile")
                 generalUtils.createNewLine()
-                while True:
-                    confirmationChoice = input("Is this correct? Y/N ").upper()
-                    if confirmationChoice == "Y":
-                        subject = subjectAssigned[0]
-                        numberOfSubjects = len(subjectAssigned)
-                        studentForm = f"Form_{subject[:-1]}"
-                        if updateStudentProfile("UserDetails.txt", userID, "STUDENT",password,ICNumber,formattedName,email,phoneNumber,birthday,gender,subjectAssigned, numberOfSubjects, studentForm) == True:
-                            print("\nProfile Updated")
+                print("1. Update Profile\n2. Exit")
+                generalUtils.createNewLine()
+                updateChoice = input("Choice: ")
+                if updateChoice == "1":
+                    password = input("\nPassword: ")
+                    ICNumber = int(input("\nIC Number: "))
+                    fullName = input("\nFull name: ")
+                    formattedName = fullName.replace(" ","_")
+                    email = input("\nEmail: ")
+                    phoneNumber = int(input("\nPhone Number: "))
+                    generalUtils.createNewLine()
+                    while True: 
+                        print("Gender")
+                        generalUtils.createNewLine()
+                        print("1. Male\n2. Female\n3. N/A")
+                        generalUtils.createNewLine()
+                        gender = input("Choice: ").upper()
+                        generalUtils.createNewLine()
+                        if gender == "MALE" or gender == "FEMALE" or gender == "N/A":
+                            break
+                        else: 
+                            continue
+                    while True: 
+                        birthday = input("Birthday(DD/MM/YYYY): ").replace("/","-")
+                        generalUtils.createNewLine()
+                        if len(str(birthday)) == 10:
+                            break
+                        else:
+                            continue
+                    print(f"Profile\n\nID Number: {userID}\nPassword: {password}\nIC Number: {ICNumber}\nFull Name: {fullName}\nEmail: {email}\nPhone Number: {phoneNumber}\nGender: {gender}\nBirthday: {birthday}")
+                    generalUtils.createNewLine()
+                    while True:
+                        confirmationChoice = input("Is this correct? Y/N ").upper()
+                        if confirmationChoice == "Y":
+                            subject = subjectAssigned[0]
+                            numberOfSubjects = len(subjectAssigned)
+                            studentForm = f"Form_{subject[:-1]}"
+                            if updateStudentProfile("UserDetails.txt", userID, "STUDENT",password,ICNumber,formattedName,email,phoneNumber,birthday,gender,subjectAssigned, numberOfSubjects, studentForm) == True:
+                                print("\nProfile Updated")
+                                time.sleep(3)
+                                break
+                        elif confirmationChoice == "N":
+                            print("\nProfile not updated")
                             time.sleep(3)
                             break
-                    elif confirmationChoice == "N":
-                        print("\nProfile not updated")
+                        else:
+                            print("Invalid Input!\n")
                         time.sleep(3)
-                        break
-                    else:
-                        print("Invalid Input!\n")
-                    time.sleep(3)
-            elif updateChoice == "2":
-                break
-            else:
-                continue
+                elif updateChoice == "2":
+                    break
+                else:
+                    continue
         elif choice == "5":
             generalUtils.clearConsole()
             generalUtils.createNewLine()

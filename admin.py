@@ -252,58 +252,59 @@ def pgAdmin(userID):
                     continue
             generalUtils.clearConsole()
         elif choice == "4":
-            generalUtils.clearConsole()
-            generalUtils.createNewLine()
-            print("Update Admin Profile")
-            generalUtils.createNewLine()
-            print("1. Update Admin Profile\n2. Exit")
-            generalUtils.createNewLine()
-            updateProfileChoice = input("Choice: ")
-            if updateProfileChoice == "1":
-                password = input("\nPassword:")
-                email = input("\nEmail:")
-                fullName = input("\nFull Name:")
-                formattedFullName = fullName.replace(" ","_")
-                ICNumber = int(input("\nIC Number:"))
-                phoneNumber = int(input("\nPhone Number:"))
+            while True:
+                generalUtils.clearConsole()
                 generalUtils.createNewLine()
-                while True:
-                    print("Gender:")
+                print("Update Admin Profile")
+                generalUtils.createNewLine()
+                print("1. Update Admin Profile\n2. Exit")
+                generalUtils.createNewLine()
+                updateProfileChoice = input("Choice: ")
+                if updateProfileChoice == "1":
+                    password = input("\nPassword:")
+                    email = input("\nEmail:")
+                    fullName = input("\nFull Name:")
+                    formattedFullName = fullName.replace(" ","_")
+                    ICNumber = int(input("\nIC Number:"))
+                    phoneNumber = int(input("\nPhone Number:"))
                     generalUtils.createNewLine()
-                    print("1. Male\n2. Female\n3. N/A")
-                    generalUtils.createNewLine()
-                    gender = input("Choice:").upper()
-                    generalUtils.createNewLine()
-                    if gender == "MALE" or gender == "FEMALE" or gender == "N/A":
-                        break
-                    else:
-                        continue
-                while True:
-                    birthday = input("Birthday:(DD/MM/YYYY):").replace("/","-")
-                    generalUtils.createNewLine()
-                    if len(str(birthday)) == 10:
-                        break
-                    else:
-                        continue
-                print(f"User ID:{userID}\nIC Number:{ICNumber}\nFull name:{fullName}\nEmail:{email}\nPhone Number:{phoneNumber}\nGender:{gender}\nBirthday:{birthday}")
-                while True:
-                    generalUtils.createNewLine()
-                    choiceToMakeChange = input("Is this correct(Y/N)? ").upper()
-                    if choiceToMakeChange == "Y":
-                        updateAdminProfile("UserDetails.txt",userID,"ADMIN",password,ICNumber,formattedFullName,email,phoneNumber,birthday,gender)
-                        print("\nProfile Updated")
-                        break
-                    elif choiceToMakeChange == "N":
-                        print("\nProfile not updated")
-                        break
-                    else:
-                        print("\nInvalid Input. Please try again.\n")
-                    time.sleep(5)
-                    generalUtils.clearConsole()
-            elif updateProfileChoice == "2":
-                break
-            else:
-                continue
+                    while True:
+                        print("Gender:")
+                        generalUtils.createNewLine()
+                        print("1. Male\n2. Female\n3. N/A")
+                        generalUtils.createNewLine()
+                        gender = input("Choice:").upper()
+                        generalUtils.createNewLine()
+                        if gender == "MALE" or gender == "FEMALE" or gender == "N/A":
+                            break
+                        else:
+                            continue
+                    while True:
+                        birthday = input("Birthday:(DD/MM/YYYY):").replace("/","-")
+                        generalUtils.createNewLine()
+                        if len(str(birthday)) == 10:
+                            break
+                        else:
+                            continue
+                    print(f"User ID:{userID}\nIC Number:{ICNumber}\nFull name:{fullName}\nEmail:{email}\nPhone Number:{phoneNumber}\nGender:{gender}\nBirthday:{birthday}")
+                    while True:
+                        generalUtils.createNewLine()
+                        choiceToMakeChange = input("Is this correct(Y/N)? ").upper()
+                        if choiceToMakeChange == "Y":
+                            updateAdminProfile("UserDetails.txt",userID,"ADMIN",password,ICNumber,formattedFullName,email,phoneNumber,birthday,gender)
+                            print("\nProfile Updated")
+                            break
+                        elif choiceToMakeChange == "N":
+                            print("\nProfile not updated")
+                            break
+                        else:
+                            print("\nInvalid Input. Please try again.\n")
+                        time.sleep(5)
+                        generalUtils.clearConsole()
+                elif updateProfileChoice == "2":
+                    break
+                else:
+                    continue
         elif choice == "5":
             print("Log Out")
             return "LOGOUT"
