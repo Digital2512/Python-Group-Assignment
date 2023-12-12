@@ -7,21 +7,18 @@ import ast
 def updateReceptionistProfile(fileToCheck, IDNumber, role, password, ICNumber, fullName, email, phoneNumber, birthday, gender):
     updatedProfile = False
     capitalizedRole = role.upper()
-    updated_data = []  # To store updated data
+    updated_data = [] 
     with open(fileToCheck, "+r") as file:
         for line in file:
             values = line.strip().split(";")
             if values[1] == str(IDNumber):
-                # Skip the line to delete it
                 updatedProfile = True
                 continue
             updated_data.append(line)
 
-    # Add the updated line at the end
     if updatedProfile == True: 
         updated_data.append(f"{capitalizedRole};{IDNumber};{password};{ICNumber};{fullName};{email};{phoneNumber};{gender};{birthday}\n")
 
-    # Write the updated data back to the file
         with open(fileToCheck, "+w") as file:
             file.writelines(updated_data)
     return updatedProfile
@@ -334,7 +331,7 @@ def pgReceptionist(userID):
                     connectedName = name.replace(" ","_")
                     while True:
                         generalUtils.createNewLine()
-                        print("Students Form")
+                        print("Student's Form")
                         generalUtils.createNewLine()
                         print("1. Form 1\n2. Form 2\n3. Form 3\n4. Form 4\n5. Form 5")
                         generalUtils.createNewLine()
@@ -542,9 +539,7 @@ def pgReceptionist(userID):
                             values = line.strip().split(";")
                             if values[1] == searchStudentID:
                                 studentSubjects = eval(values[11])
-
                                 for deleteSubject in studentSubjects:
-                                    print(deleteSubject)
                                     deleteStudentList("SubjectsInfo.txt", deleteSubject, studentName)
                                 values[11] = str([subject for subject in studentSubjects if subject != deleteSubject])
                                 line = ";".join(values) + "\n"
@@ -622,9 +617,10 @@ def pgReceptionist(userID):
                                                 print("\nRequest Rejected")
                                                 time.sleep(3)
                                                 break
-                                            generalUtils.createNewLine()
-                                            time.sleep(3)
-                                            break
+                                            else: 
+                                                print("\nError: Subject Request was not rejected")
+                                                time.sleep(3)
+                                                break
                                         else:
                                             continue
                                     break
@@ -663,7 +659,7 @@ def pgReceptionist(userID):
                                     generalUtils.createNewLine()   
                                     studentID = database.readListValue(paymentRequestID, 0, 1, "PaymentRequest.txt")
                                     print(f"Student ID: {studentID}\n")
-                                    name = database.readListValue(studentID, 1, 2, "StudentRequest.txt")
+                                    name = database.readListValue(studentID, 1, 2, "PaymentRequest.txt")
                                     spacedName = name.replace("_", " ")
                                     print(f"Full Name: {spacedName}")
                                     subjectCode = database.readListValue(paymentRequestID, 0, 3, "PaymentRequest.txt")
@@ -696,8 +692,6 @@ def pgReceptionist(userID):
                                                 print("\nPayment Request Rejected")
                                                 time.sleep(3)
                                                 break
-                                            generalUtils.createNewLine()
-                                            time.sleep(3)
                                         else:
                                             continue
                                     break

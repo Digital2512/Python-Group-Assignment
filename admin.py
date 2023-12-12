@@ -86,11 +86,11 @@ def pgAdmin(userID):
                     confirmationChoice = input("Is this correct(Y/N?)").upper()
                     if confirmationChoice == "Y":
                         registerReceptionist(receptionistUserID,password)
-                        print("\nReceptonist registered")
+                        print("\nReceptionist registered")
                         time.sleep(3)
                         break
                     elif confirmationChoice == "N":
-                        print("\nReceptonist not registered")
+                        print("\nReceptionist not registered")
                         time.sleep(3)
                         break
                     else: 
