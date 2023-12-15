@@ -525,7 +525,6 @@ def pgReceptionist(userID):
                 print("1. Delete Student\n2. Exit")
                 generalUtils.createNewLine()
                 deleteStudentChoice = input("Choice: ")
-                generalUtils.clearConsole()
                 if deleteStudentChoice == "1":
                     generalUtils.createNewLine()
                     searchStudentID = input("Search Student's ID: ")

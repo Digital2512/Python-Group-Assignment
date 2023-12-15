@@ -30,17 +30,27 @@ def pgMain():
                 isUsernameFound = database.searchListValue(inputUsername, 1, "UserDetails.txt")
                 if isUsernameFound:
                     break
+                elif not isUsernameFound:
+                    print("\nWrong Username")
+                    generalUtils.createNewLine()
 
             if isUsernameFound == False:
+                print("Logged In Unsuccessful")
+                generalUtils.createNewLine()
                 return
             
             for i in range(0,3,1):
-                inputPassword = input("\nPassword: ")
+                inputPassword = input("Password: ")
                 isPasswordFound = database.searchListValueBasedOnValue(inputUsername, 1, 2, inputPassword, "UserDetails.txt")
                 if isPasswordFound:
                     break
+                elif not isPasswordFound:
+                    print("\nWrong Password")
+                    generalUtils.createNewLine()
             
             if isPasswordFound == False:
+                print("Logged In Unsuccessful")
+                generalUtils.createNewLine()
                 return
             
             # Success logged in
@@ -48,7 +58,8 @@ def pgMain():
                 roleFound = database.readListValue(inputUsername, 1, 0,"UserDetails.txt")
                 capitalizedRole = roleFound.upper()
                 if capitalizedRole == "ADMIN":
-                    print("Admin")
+                    print("\nLogged In Successful")
+                    generalUtils.createNewLine()
                     result = admin.pgAdmin(inputUsername)
                     if result == "LOGOUT":
                         continue
@@ -57,7 +68,8 @@ def pgMain():
                         break
                     # Add code to navigate to the admin's page here
                 elif capitalizedRole == "TUTOR":
-                    print("Tutor")
+                    print("\nLogged In Successful")
+                    generalUtils.createNewLine()
                     result = tutor.pgTutor(inputUsername)
                     if result == "LOGOUT":
                         continue
@@ -66,7 +78,8 @@ def pgMain():
                         break
                     # Add code to navigate to the tutor's page here
                 elif capitalizedRole == "STUDENT":
-                    print("Student")
+                    print("\nLogged In Successful")
+                    generalUtils.createNewLine()
                     result = student.pgStudent(inputUsername)
                     if result == "LOGOUT":
                         continue
@@ -75,7 +88,8 @@ def pgMain():
                         break
                     # Add code to navigate to the student's page here
                 elif capitalizedRole == "RECEPTIONIST":
-                    print("Receptionist")
+                    print("\nLogged In Successful")
+                    generalUtils.createNewLine()
                     result = receptionist.pgReceptionist(inputUsername)
                     if result == "LOGOUT":
                         continue
@@ -86,6 +100,7 @@ def pgMain():
             else: 
                 print("Your account could not be accessed (If you think this is a mistake, please contact the Admin)")
                 break
+        
 
         elif choice == "2":
             print("\nThank you for visiting TEC")
