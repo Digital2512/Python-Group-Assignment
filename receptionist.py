@@ -360,7 +360,7 @@ def pgReceptionist(userID):
                                             else:
                                                 print("Error: Subject has already been chosen")
                                         else: 
-                                            print("Error: Invalid Input(Please choose from the availale subject list)")
+                                            print("Error: Invalid Input(Please choose from the available subject list)")
                                             continue
                                     break
                                 else:
