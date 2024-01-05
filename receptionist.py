@@ -318,8 +318,8 @@ def pgReceptionist(userID):
                 print("1. Register Student\n2. Exit")
                 generalUtils.createNewLine()
                 registerStudentChoice = input("Choice: ")
-                generalUtils.clearConsole()
                 if registerStudentChoice == "1":
+                    generalUtils.clearConsole()
                     generalUtils.createNewLine()
                     print("Register Student")
                     generalUtils.createNewLine()
@@ -365,6 +365,8 @@ def pgReceptionist(userID):
                                     break
                                 else:
                                     print("Number of subjects for a student can only be up to 3 subjects")
+                                    time.sleep(2)
+                                    generalUtils.createNewLine()
                                     continue
                         elif formChoice == "2":
                             form = "Form 2"
@@ -393,6 +395,9 @@ def pgReceptionist(userID):
                                             continue
                                     break
                                 else:
+                                    print("Number of subjects for a student can only be up to 3 subjects")
+                                    time.sleep(2)
+                                    generalUtils.createNewLine()
                                     continue
                         elif formChoice == "3":
                             form = "Form 3"
@@ -421,6 +426,9 @@ def pgReceptionist(userID):
                                             continue
                                     break
                                 else:
+                                    print("Number of subjects for a student can only be up to 3 subjects")
+                                    time.sleep(2)
+                                    generalUtils.createNewLine()
                                     continue
                         elif formChoice == "4":
                             form = "Form 4"
@@ -449,6 +457,9 @@ def pgReceptionist(userID):
                                             continue
                                     break
                                 else:
+                                    print("Number of subjects for a student can only be up to 3 subjects")
+                                    time.sleep(2)
+                                    generalUtils.createNewLine()
                                     continue
                         elif formChoice == "5":
                             form = "Form 5"
@@ -478,8 +489,14 @@ def pgReceptionist(userID):
                                             continue
                                     break
                                 else:
+                                    print("Number of subjects for a student can only be up to 3 subjects")
+                                    time.sleep(2)
+                                    generalUtils.createNewLine()
                                     continue
                         else: 
+                            print("\nInvalid Choice\nTry Again")
+                            time.sleep(2)
+                            generalUtils.createNewLine()
                             continue
                         generalUtils.clearConsole()
                         generalUtils.createNewLine()
@@ -504,8 +521,14 @@ def pgReceptionist(userID):
                         break
                     break
                 elif registerStudentChoice == "2":
+                    print("\nExiting")
+                    time.sleep(2)
+                    generalUtils.createNewLine()
                     break
                 else:
+                    print("\nInvalid Option\nTry Again")
+                    time.sleep(2)
+                    generalUtils.createNewLine()
                     continue
         elif choice1 == "2":
             while True:
@@ -542,14 +565,22 @@ def pgReceptionist(userID):
                                     deleteStudentList("SubjectsInfo.txt", deleteSubject, studentName)
                                 values[11] = str([subject for subject in studentSubjects if subject != deleteSubject])
                                 line = ";".join(values) + "\n"
-                            if deleteProfile("UserDetails.txt", searchStudentID, "STUDENT"):
+                            if deleteProfile("UserDetails.txt", searchStudentID, "STUDENT") == True:
                                 print("Student deleted")
                                 time.sleep(3)
                                 generalUtils.createNewLine()
-                        break
+                                break
+                            else:
+                                continue
                 elif deleteStudentChoice == "2":
+                    print("\nExiting")
+                    time.sleep(2)
+                    generalUtils.createNewLine()
                     break
                 else: 
+                    print("\nInvalid Option\nTry Again")
+                    time.sleep(2)
+                    generalUtils.createNewLine()
                     continue
         elif choice1 == "3":
             while True:
@@ -561,20 +592,20 @@ def pgReceptionist(userID):
                 generalUtils.createNewLine()
                 requestChoice = input("Choice: ")
                 if requestChoice == "1":
-                    generalUtils.clearConsole()
-                    generalUtils.createNewLine()
-                    print("Subject Request")
-                    generalUtils.createNewLine()
-                    with open("StudentRequest.txt", "r+") as file:
-                        requestList = []
-                        lines = file.readlines()
-
-                        for line in lines:
-                            values = line.strip().split(";")
-                            requestList.append(values[0])
-                    print(f"Request List: {requestList}")
-                    generalUtils.createNewLine()
                     while True:
+                        generalUtils.clearConsole()
+                        generalUtils.createNewLine()
+                        print("Subject Request")
+                        generalUtils.createNewLine()
+                        with open("StudentRequest.txt", "r+") as file:
+                            requestList = []
+                            lines = file.readlines()
+
+                            for line in lines:
+                                values = line.strip().split(";")
+                                requestList.append(values[0])
+                        print(f"Request List: {requestList}")
+                        generalUtils.createNewLine()
                         print("1. Continue\n2. Exit")
                         generalUtils.createNewLine()
                         studentRequestChoice = input("Choice: ")
@@ -621,6 +652,9 @@ def pgReceptionist(userID):
                                                 time.sleep(3)
                                                 break
                                         else:
+                                            print("\nInvalid Option\nTry Again")
+                                            time.sleep(2)
+                                            generalUtils.createNewLine()
                                             continue
                                     break
                             else: 
@@ -628,24 +662,30 @@ def pgReceptionist(userID):
                                 generalUtils.createNewLine()
                                 time.sleep(3)
                         elif studentRequestChoice == "2":
+                            print("\nExiting")
+                            time.sleep(2)
+                            generalUtils.createNewLine()
                             break
                         else:
+                            print("\nInvalid Option\nTry Again")
+                            generalUtils.createNewLine()
+                            time.sleep(2)
                             continue
                 elif requestChoice == "2":
-                    generalUtils.clearConsole()
-                    generalUtils.createNewLine()
-                    print("Payment Request")
-                    generalUtils.createNewLine()
-                    with open("PaymentRequest.txt", "r+") as file:
-                        requestList = []
-                        lines = file.readlines()
-
-                        for line in lines:
-                            values = line.strip().split(";")
-                            requestList.append(values[0])
-                    print(f"Request List: {requestList}")
-                    generalUtils.createNewLine()
                     while True:
+                        generalUtils.clearConsole()
+                        generalUtils.createNewLine()
+                        print("Payment Request")
+                        generalUtils.createNewLine()
+                        with open("PaymentRequest.txt", "r+") as file:
+                            requestList = []
+                            lines = file.readlines()
+
+                            for line in lines:
+                                values = line.strip().split(";")
+                                requestList.append(values[0])
+                        print(f"Request List: {requestList}")
+                        generalUtils.createNewLine()
                         print("1. Continue\n2. Exit")
                         generalUtils.createNewLine()
                         paymentRequestChoice = input("Choice: ")
@@ -699,12 +739,24 @@ def pgReceptionist(userID):
                                     generalUtils.createNewLine()
                                     time.sleep(3)
                         elif paymentRequestChoice == "2":
+                            print("\nExiting")
+                            time.sleep(2)
+                            generalUtils.createNewLine()
                             break
                         else:
+                            print("\nInvalid Option\nTry Again")
+                            time.sleep(2)
+                            generalUtils.createNewLine()
                             continue
                 elif requestChoice == "3":
+                    print("\nExiting")
+                    time.sleep(2)
+                    generalUtils.createNewLine()
                     break
                 else:
+                    print("\nInvalid Option\nTry Again")
+                    time.sleep(2)
+                    generalUtils.createNewLine()
                     continue
         elif choice1 == "4":
             while True:
@@ -733,6 +785,9 @@ def pgReceptionist(userID):
                         if gender == "MALE" or gender == "FEMALE" or gender == "N/A":
                             break
                         else: 
+                            print("\nInvalid gender\n\nPlease retype your gender again")
+                            time.sleep(2)
+                            generalUtils.createNewLine()
                             continue
                     while True: 
                         birthday = input("Birthday(DD/MM/YYYY): ").replace("/","-")
@@ -740,6 +795,9 @@ def pgReceptionist(userID):
                         if len(str(birthday)) == 10:
                             break
                         else:
+                            print("\nInvalid Birthday\n\Please retype your birthday again in this format(DD/MM/YYYY)")
+                            time.sleep(2)
+                            generalUtils.createNewLine()
                             continue
                     print(f"ID Number: {userID}\nPassword: {password}\nIC Number: {ICNumber}\nFull Name: {fullName}\nEmail: {email}\nPhone Number: {phoneNumber}\nGender: {gender}\nBirthday: {birthday}")
                     generalUtils.createNewLine()
@@ -755,12 +813,18 @@ def pgReceptionist(userID):
                             time.sleep(3)
                             break
                         else:
-                            print("Invalid Input!\n")
+                            print("\nInvalid Input!\n")
                             time.sleep(2)
                     break
                 elif updateProfileChoice == "2":
+                    print("\nExiting")
+                    time.sleep(2)
+                    generalUtils.createNewLine()
                     break
                 else:
+                    print("\nInvalid Option\nTry Again")
+                    time.sleep(2)
+                    generalUtils.createNewLine()
                     continue
         elif choice1 == "5":
             generalUtils.clearConsole()
@@ -777,7 +841,7 @@ def pgReceptionist(userID):
             print(f"User ID: {userID}\nIC Number: {ICNumber}\nFull Name: {fullName}\nEmail: {email}\nPhone Number: {phoneNumber}\nGender: {gender}\nBirthday: {birthday}")
             generalUtils.createNewLine()
             while True:
-                print("Done Viewing(Enter Y when you are done)? ")
+                print("Done Viewing(Y/N)? ")
                 generalUtils.createNewLine()
                 doneViewing = input("Choice: ").upper()
                 if doneViewing == "Y":
@@ -785,7 +849,12 @@ def pgReceptionist(userID):
                 else:
                     continue
         elif choice1 == "6":
-            print("Logging out")
+            print("\nLogging out")
+            time.sleep(2)
+            generalUtils.createNewLine()
             return "LOGOUT"
         else:
+            print("\nInvalid Option\nTry Again")
+            time.sleep(2)
+            generalUtils.createNewLine()
             continue

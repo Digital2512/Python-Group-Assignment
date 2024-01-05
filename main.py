@@ -98,7 +98,7 @@ def pgMain():
                         break
                     # Add code to navigate to the receptionist's page here
             else: 
-                print("Your account could not be accessed (If you think this is a mistake, please contact the Admin)")
+                print("Logged In Unsuccesful\n\nYour account could not be accessed (If you think this is a mistake, please contact the Admin)")
                 break
         
 

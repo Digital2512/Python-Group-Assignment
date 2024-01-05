@@ -1,4 +1,1 @@
 ADMIN;A001;Admin123;N/A;N/A;N/A;N/A;N/A;N/A;
-TUTOR;T001;Tutor123;N/A;N/A;N/A;N/A;N/A;N/A;N/A;3;['ENF1', 'CHF1', 'MAF1'];
-RECEPTIONIST;R001;Receptionist123;N/A;N/A;N/A;N/A;N/A;N/A;N/A;
-STUDENT;S001;Student123;N/A;Student_1;N/A;N/A;N/A;N/A;Form_1;3;['CHF2', 'ENF1', 'MAF1'];
