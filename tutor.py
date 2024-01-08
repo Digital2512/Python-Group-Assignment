@@ -75,9 +75,9 @@ def updateClassSchedule(fileToCheck, classCode, classTime, classLocation, classD
 
     # Add the updated line at the end
     if updatedClass: 
-        updated_data.append(f"{previousLocation};{previousDay};{previousTime};N/A;AVAILABLE;\n")
-        updated_data.append(f"{classLocation};{classDay};{classTime};{classCode};UNAVAILABLE;\n")
-        updated_data.remove(f"{classLocation};{classDay};{classTime};N/A;AVAILABLE;\n")
+        updated_data.append(f"{previousLocation};{previousDay};{previousTime};N/A;AVAILABLE\n")
+        updated_data.remove(f"{classLocation};{classDay};{classTime};N/A;AVAILABLE\n")
+        updated_data.append(f"{classLocation};{classDay};{classTime};{classCode};UNAVAILABLE\n")
 
     # Write the updated data back to the file
         with open(fileToCheck, "+w") as file:
