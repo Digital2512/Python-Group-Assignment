@@ -187,7 +187,7 @@ def pgStudent(userID):
                                 if deleteRequestID in requestList:
                                     break
                                 else:
-                                    print("\nError: Payment Request ID not found")
+                                    print("\nError: Subject Request ID not found")
                                     time.sleep(2)
                                     continue
                             generalUtils.createNewLine()
@@ -508,7 +508,7 @@ def pgStudent(userID):
                         if confirmationChoice == "Y":
                             subject = subjectAssigned[0]
                             numberOfSubjects = len(subjectAssigned)
-                            studentForm = f"Form_{subject[:-1]}"
+                            studentForm = f"Form_{subject[-1]}"
                             if updateStudentProfile("UserDetails.txt", userID, "STUDENT",password,ICNumber,formattedName,email,phoneNumber,birthday,gender,subjectAssigned, numberOfSubjects, studentForm) == True:
                                 print("\nProfile Updated")
                                 time.sleep(3)

@@ -507,7 +507,7 @@ def pgTutor(userID):
                         if confirmationChoice == "Y":
                             subject = subjectAssigned[0]
                             numberOfSubjects = len(subjectAssigned)
-                            subjectForm = subject[:-1]
+                            subjectForm = subject[-1]
                             if updateTutorProfile("UserDetails.txt", userID, "TUTOR",password,ICNumber,formattedName,email,phoneNumber,birthday,gender,subjectForm,numberOfSubjects,subjectAssigned) == True:
                                 print("Profile Updated")
                                 break
