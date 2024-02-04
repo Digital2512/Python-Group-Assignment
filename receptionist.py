@@ -556,22 +556,22 @@ def pgReceptionist(userID):
                     with open("UserDetails.txt", "r+") as file:
                         studentSubjects = []
                         lines = file.readlines()
-
                         for line in lines:
                             values = line.strip().split(";")
                             if values[1] == searchStudentID:
                                 studentSubjects = eval(values[11])
+                                print(studentSubjects)
                                 for deleteSubject in studentSubjects:
                                     deleteStudentList("SubjectsInfo.txt", deleteSubject, studentName)
                                 values[11] = str([subject for subject in studentSubjects if subject != deleteSubject])
                                 line = ";".join(values) + "\n"
-                            if deleteProfile("UserDetails.txt", searchStudentID, "STUDENT") == True:
-                                print("Student deleted")
-                                time.sleep(3)
-                                generalUtils.createNewLine()
-                                break
-                            else:
-                                continue
+                        if deleteProfile("UserDetails.txt", searchStudentID, "STUDENT") == True:
+                            print("Student deleted")
+                            time.sleep(3)
+                            generalUtils.createNewLine()
+                            break
+                        else:
+                            continue
                 elif deleteStudentChoice == "2":
                     print("\nExiting")
                     time.sleep(2)
